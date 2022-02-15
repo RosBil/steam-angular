@@ -20,6 +20,15 @@ app.listen(process.env.PORT || 8080);
 //   .use(express.static(path.join(__dirname, 'public')))
 //   .get('/', (req, res) => res.render('dist/steam-angular/index'))
 //     .listen(PORT, () => console.log(`Listening on ${PORT}`))
+
+// const express = require('express')
+// const path = require('path')
+// const PORT = process.env.PORT || 8080
+
+// express()
+//   .use(express.static(path.join(__dirname, 'public')))
+//   .get('/', (req, res) => res.render('dist/steam-angular/index'))
+//     .listen(PORT, () => console.log(`Listening on ${PORT}`))
   
 // //Install express server
 // const express = require('express');
