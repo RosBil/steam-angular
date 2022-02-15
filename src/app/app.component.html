@@ -1,0 +1,49 @@
+<header class="header" *ngIf="isLogin">
+  <div class="header-logo">
+    <a routerLink="/games" routerLinkActive="active-link">
+      <img src="../assets/logo.png" alt="logo" class="header-logo-img" />
+    </a>
+  </div>
+  <nav class="header-menu navbar">
+    <ul class="navbar-list">
+      <li class="navbar-item">
+        <a
+          class="navbar-link"
+          routerLink="/games"
+          routerLinkActive="active-link"
+          >Games</a
+        >
+      </li>
+      <li class="navbar-item">
+        <a
+          class="navbar-link"
+          routerLink="/library"
+          routerLinkActive="active-link"
+          >Library</a
+        >
+      </li>
+      <li class="navbar-item">
+        <a
+          class="navbar-link"
+          routerLink="/friends"
+          routerLinkActive="active-link"
+          >Friends</a
+        >
+      </li>
+      <li class="navbar-item">
+        <a
+          class="navbar-link"
+          routerLink="/profile"
+          routerLinkActive="active-link"
+          >Profile</a
+        >
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main class="main">
+  <router-outlet></router-outlet>
+</main>
+
+<h2>Let mortal kombat begin</h2>

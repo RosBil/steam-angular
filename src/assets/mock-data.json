@@ -1,0 +1,208 @@
+[
+  {
+    "games": [
+      {
+        "title": "Doom Ethernal",
+        "description": "Hell armies have invaded Earth. Become the Slayer in an epic single-player campaign to conquer demons across dimensions and stop the final destruction of humanity. The only thing they fear... is you.",
+        "price": "200",
+        "tag": "action"
+      },
+      {
+        "title": "Gris",
+        "description": "Gris is a hopeful young girl lost in her own world, dealing with a painful experience in her life. Her journey through sorrow is manifested in her dress, which grants new abilities to better navigate her faded reality.",
+        "price": "350",
+        "tag": "indie"
+      },
+      {
+        "title": "Path of Exile",
+        "description": "You are an Exile, struggling to survive on the dark continent of Wraeclast, as you fight to earn power that will allow you to exact your revenge against those who wronged you. Created by hardcore gamers, Path of Exile is an online Action RPG set in a dark fantasy world.",
+        "price": "800",
+        "tag": "adventure"
+      },
+      {
+        "title": "Forza Horizon 5",
+        "description": "Your Ultimate Horizon Adventure awaits! Explore the vibrant and ever-evolving open world landscapes of Mexico with limitless, fun driving action in hundreds of the world's greatest cars. Begin Your Horizon Adventure today and add to your Wishlist!",
+        "price": "1250",
+        "tag": "adventure"
+      },
+      {
+        "title": "Deathloop",
+        "description": "Deathloop is a next-gen FPS from Arkane Lyon, the award-winning studio behind Dishonored. In Deathloop, two rival assassins are trapped in a mysterious timeloop on the island of Blackreef, doomed to repeat the same day for eternity.",
+        "price": "1200",
+        "tag": "action"
+      },
+      {
+        "title": "Dying Light 2",
+        "description": "The virus won and civilization has fallen back to the Dark Ages. The City, one of the last human settlements, is on the brink of collapse. Use your agility and combat skills to survive, and reshape the world. Your choices matter.",
+        "price": "350",
+        "tag": "action"
+      },
+      {
+        "title": "Hitman 3",
+        "description": "Death Awaits. Agent 47 returns in Hitman 3, the dramatic conclusion to the World of Assassination trilogy.",
+        "price": "600",
+        "tag": "action"
+      },
+      {
+        "title": "It Takes Two",
+        "description": "Embark on the craziest journey of your life in It Takes Two. Invite a friend to join for free with Friend's Pass and work together across a huge variety of gleefully disruptive gameplay challenges.",
+        "price": "750",
+        "tag": "adventure"
+      },
+      {
+        "title": "Wartales",
+        "description": "Wartales is an open world RPG in which you lead a group of mercenaries in their search for wealth across a massive medieval universe. Explore the world, recruit companions, collect bounties and unravel the secrets of the tombs of the ancients!",
+        "price": "500",
+        "tag": "indie"
+      },
+      {
+        "title": "Hades",
+        "description": "Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler from the creators of Bastion, Transistor, and Pyre.",
+        "price": "350",
+        "tag": "indie"
+      },
+      {
+        "title": "Rust",
+        "description": "The only aim in Rust is to survive. Everything wants you to die - the island's wildlife and other inhabitants, the environment, other survivors. Do whatever it takes to last another night.",
+        "price": "200",
+        "tag": "action"
+      },
+      {
+        "title": "New World",
+        "description": "Explore a thrilling, open-world MMO filled with danger and opportunity where you'll forge a new destiny on the supernatural island of Aeternum.",
+        "price": "1200",
+        "tag": "adventure"
+      },
+      {
+        "title": "Space Engineers",
+        "description": "Space Engineers is a sandbox game about engineering, construction, exploration and survival in space and on planets. Players build space ships, space stations, planetary outposts of various sizes and uses, pilot ships and travel through space to explore planets and gather resources to survive.",
+        "price": "800",
+        "tag": "indie"
+      },
+      {
+        "title": "Warframe",
+        "description": "Awaken as an unstoppable warrior and battle alongside your friends in this story-driven free-to-play online action game",
+        "price": "600",
+        "tag": "action"
+      },
+      {
+        "title": "Pummel Party",
+        "description": "Pummel Party is a 4-8 player online and local-multiplayer party game. Pummel friends or AI using a wide array of absurd items in the board mode and compete to destroy friendships in the unique collection of minigames.",
+        "price": "500",
+        "tag": "indie"
+      },
+      {
+        "title": "Sea of Thieves",
+        "description": "Sea of Thieves offers the essential pirate experience, from sailing and fighting to exploring and looting - everything you need to live the pirate life and become a legend in your own right.",
+        "price": "760",
+        "tag": "adventure"
+      },
+      {
+        "title": "Valheim",
+        "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture. Battle, build, and conquer your way to a saga worthy of Odins patronage!",
+        "price": "350",
+        "tag": "adventure"
+      },
+      {
+        "title": "Borderlands 3",
+        "description": "The original shooter-looter returns, packing bazillions of guns and a mayhem-fueled adventure! Blast through new worlds and enemies as one of four new Vault Hunters.",
+        "price": "700",
+        "tag": "action"
+      },
+      {
+        "title": "Disco Elysium - The Final Cut",
+        "description": "Disco Elysium - The Final Cut is a groundbreaking role playing game. You're a detective with a unique skill system at your disposal and a whole city to carve your path across. Interrogate unforgettable characters, crack murders or take bribes.",
+        "price": "150",
+        "tag": "indie"
+      },
+      {
+        "title": "Outer Wilds",
+        "description": "Named Game of the Year 2019 by Giant Bomb, Polygon, Eurogamer, and The Guardian, Outer Wilds is a critically-acclaimed and award-winning open world mystery about a solar system trapped in an endless time loop.",
+        "price": "500",
+        "tag": "adventure"
+      }
+    ],
+    "friends": [
+      {
+        "nickname": "Figgy",
+        "email": "daveed@yahoo.ca"
+      },
+      {
+        "nickname": "Pickle",
+        "email": "lamky@gmail.com"
+      },
+      {
+        "nickname": "Cheerio",
+        "email": "novanet@live.com"
+      },
+      {
+        "nickname": "Doctor",
+        "email": "chunzi@live.com"
+      },
+      {
+        "nickname": "Popeye",
+        "email": "paulv@msn.com"
+      },
+      {
+        "nickname": "Snoopy",
+        "email": "techie@aol.com"
+      },
+      {
+        "nickname": "Amigo",
+        "email": "avalon@att.net"
+      },
+      {
+        "nickname": "Bubbles",
+        "email": "shawnce@gmail.com"
+      },
+      {
+        "nickname": "Marge",
+        "email": "bolow@optonline.net"
+      },
+      {
+        "nickname": "Buster",
+        "email": "fglock@gmail.com"
+      },
+      {
+        "nickname": "Rosie",
+        "email": "hikoza@gmail.com"
+      },
+      {
+        "nickname": "Big Guy",
+        "email": "sinclair@me.com"
+      },
+      {
+        "nickname": "mr.Bacon",
+        "email": "pizza@mac.com"
+      },
+      {
+        "nickname": "Braveheart",
+        "email": "north@aol.com"
+      },
+      {
+        "nickname": "Captain",
+        "email": "csilvers@yahoo.ca"
+      },
+      {
+        "nickname": "Amethyst",
+        "email": "wonderkid@icloud.com"
+      },
+      {
+        "nickname": "Rocketfuel",
+        "email": "frode@gmail.com"
+      },
+      {
+        "nickname": "Mountain",
+        "email": "rddesign@icloud.com"
+      },
+      {
+        "nickname": "Belle",
+        "email": "gilmoure@aol.com"
+      },
+      {
+        "nickname": "Diesel",
+        "email": "crandall@gmail.com"
+      }
+    ]
+  }
+]
