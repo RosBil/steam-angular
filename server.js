@@ -1,15 +1,24 @@
-//Install express server
-const express = require('express');
-const path = require('path');
+const express = require('express')
+const path = require('path')
+const PORT = process.env.PORT || 8080
 
-const app = express();
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .get('/', (req, res) => res.render('dist/steam-angular'))
+    .listen(PORT, () => console.log(`Listening on ${PORT}`))
+  
+// //Install express server
+// const express = require('express');
+// const path = require('path');
 
-// Serve only the static files form the dist directory
-app.use(express.static('./dist/steam-angular'));
+// const app = express();
 
-app.get('/', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/steam-angular/'}),
-);
+// // Serve only the static files form the dist directory
+// app.use(express.static('./dist/steam-angular'));
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+// app.get('/', (req, res) =>
+//     res.sendFile('index.html', {root: 'dist/steam-angular/'}),
+// );
+
+// // Start the app by listening on the default Heroku port
+// app.listen(process.env.PORT || 8080);
