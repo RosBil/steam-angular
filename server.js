@@ -7,7 +7,7 @@ const app = express();
 // Serve only the static files form the dist directory
 app.use(express.static('./dist/steam-angular'));
 
-app.get('/*', (req, res) =>
+app.get('/', (req, res) =>
     res.sendFile('index.html', {root: 'dist/steam-angular/'}),
 );
 

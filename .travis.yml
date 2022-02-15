@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "10"
+
+before_install:
+  - npm install -g @angular/cli
+install: npm install
+
+branches:
+  only:
+    - main
+
+deploy:
+  provider: heroku
+  app: <steam-demo-angular>
+  api_key:
+    secure: "<78c68a74-5254-4dd3-9568-3901a1bb0a59>"
