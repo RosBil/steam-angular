@@ -1,35 +1,52 @@
 <h2>Friends</h2>
 <div class="search-form">
   <div class="search-form_input--container">
-    <label for="friends-search" class="friends-search_label"
-      >Search Friends</label
-    >
+    <label for="friends-search" class="friends-search_label">
+      Search Friends
+    </label>
     <input
       type="text"
       class="friends-search_input"
       id="friends-search"
       placeholder="Search Friends"
-    #friendNameInput/>
+      [(ngModel)]="searchName"
+      (input)="friendsSearchList = []"
+      #friendNameInput
+    />
   </div>
-  <button type="button" class="search-form_button" (click)="onSearch(friendNameInput.value)">Search</button>
+  <button
+    type="button"
+    class="search-form_button"
+    (click)="searchFriend(searchName)"
+  >
+    Search
+  </button>
 </div>
 
-<!-- <app-friend-item></app-friend-item> -->
+<div *ngIf="searchName.trim().length === 0; else searchList">
+  <div class="user-list" *ngIf="friendsList$ | async as friendsList">
+    <h2>My Friends</h2>
+    <div>
+      <app-friend-item
+        *ngFor="let friend of friendsList"
+        [friend]="friend"
+      ></app-friend-item>
+    </div>
 
-
-<div class="user-list" *ngIf="!isSearching; else usersList">
-  <h2>My Friends</h2>
-  <app-friend-item *ngFor="let friend of friendsArr" class="friend-item">
-    <p class="email">{{ friend.email }}</p>
-    <button (click)="deleteFriend(friend)" class="friend-item_button--delete">Delete friend</button>
-  </app-friend-item>
+    <div *ngIf="!friendsList.length">
+      <p>You don't have any friends</p>
+    </div>
+  </div>
 </div>
 
-<ng-template #usersList class="user-list">
-  <h2>Search Friends</h2>
-  <app-friend-item *ngFor="let user of friendsArr" class="friend-item">
-    <p class="nickname">{{ user.nickname }}</p>    
-    <button *ngIf="user.isFriend" (click)="addFriend(user)" class="friend-item_button--add">Add to friends</button>
-    <button *ngIf="!user.isFriend" (click)="deleteFriend(user)" class="friend-item_button--delete">Delete friend</button>
-  </app-friend-item>
+<ng-template #searchList>
+  <div class="user-list">
+    <h2>Search Field: {{ searchName.trim() }}</h2>
+    <div>
+      <app-friend-item
+        *ngFor="let friend of friendsSearchList"
+        [friend]="friend"
+      ></app-friend-item>
+    </div>
+  </div>
 </ng-template>
