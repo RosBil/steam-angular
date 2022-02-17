@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Game } from '../shared/interfaces/game.interface';
+import { GamesServices } from '../shared/services/game.service';
 
 @Component({
   selector: 'app-library',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent implements OnInit {
-
-  constructor() { }
-
+  gamesList: Game[] = [];
+  constructor(private gamesService: GamesServices) { }
+  getGamesInLibrary(): void{
+    this.gamesService.getGamesInLibrary().subscribe((games)=> this.gamesList = games);
+  }
   ngOnInit(): void {
+    this.getGamesInLibrary();
   }
 
 }

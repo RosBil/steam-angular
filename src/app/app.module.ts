@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FriendsModule } from './friends/friends.module';
 import { GamesModule } from './games/games.module';
+import { LibraryModule } from './library/library.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { GamesModule } from './games/games.module';
     AppRoutingModule,
     FormsModule,
     FriendsModule,
-    GamesModule
+    GamesModule,
+    LibraryModule
   ],
   providers: [],
   bootstrap: [AppComponent]
