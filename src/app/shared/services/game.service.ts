@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class GamesServices {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getGames(): Observable<Game[]> {
     return this.http.get<Game>(`${environment.fbDbUrl}/games.json`).pipe(

@@ -16,6 +16,13 @@ body {
     color: #000000;
 }
 
+h2 {
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 20px;
+  }
+
 a {
     text-decoration: none;
     font-style: normal;
@@ -45,7 +52,6 @@ button {
     font-size: 1rem;
     border: none;
     cursor: pointer;
-    margin-right: 0.5rem;
     transition: opacity 0.2s ease-in;
     outline: none;
 }

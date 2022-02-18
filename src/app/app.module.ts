@@ -12,9 +12,12 @@ import { AuthService } from './shared/services/auth.service';
 
 
 
+
+import { LibraryModule } from './library/library.module';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent       
   ],
   imports: [
     BrowserModule,
@@ -23,6 +26,7 @@ import { AuthService } from './shared/services/auth.service';
     FriendsModule,
     GamesModule,
     CoreModule
+    LibraryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

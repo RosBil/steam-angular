@@ -1,1 +1,20 @@
-<p>search works!</p>
+<div class="search-form">
+  <div class="search-form_input--container">
+    <label for="games-search" class="games-search_label">Search {{label}}</label>
+    <input
+      type="text"
+      class="games-search_input"
+      placeholder="{{'Search ' + label}}"
+      #searchData
+      (input)="fillField(searchData.value)"
+    />
+  </div>
+  <button
+    type="button"
+    class="search-form_button"
+    (click)="search(searchData.value); searchData.value =''"
+    [disabled]="!searchData.value.trim()"
+  >
+    Search
+  </button>
+</div>

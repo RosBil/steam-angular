@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Friend } from 'src/app/shared/interfaces/friend.interface';
+import { FriendsServices } from 'src/app/shared/services/friend.service';
 
 @Component({
   selector: 'app-friend-item',
   templateUrl: './friend-item.component.html',
-  styleUrls: ['./friend-item.component.css']
+  styleUrls: ['./friend-item.component.scss'],
 })
 export class FriendItemComponent implements OnInit {
-  
-  constructor() { }
+  @Input() friend!: Friend;
+  @Output() remove: EventEmitter<string> = new EventEmitter<string>();
 
-  ngOnInit(): void {
+  constructor(private friendService: FriendsServices) {}
+
+  private changeStatus(friend: Friend, callback: any, status: boolean) {
+    this.friendService
+      .setMyFriend({ ...friend, isFriend: !status })
+      .subscribe(callback);
   }
 
+  public setFriend(friend: Friend): void {
+    this.changeStatus(
+      friend,
+      () => {
+        this.remove.emit(friend.id);
+      },
+      friend.isFriend
+    );
+  }
+
+  ngOnInit(): void {}
 }
