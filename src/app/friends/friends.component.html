@@ -1,35 +1,17 @@
 <h2>Friends</h2>
-<div class="search-form">
-  <div class="search-form_input--container">
-    <label for="friends-search" class="friends-search_label">
-      Search Friends
-    </label>
-    <input
-      type="text"
-      class="friends-search_input"
-      id="friends-search"
-      placeholder="Search Friends"
-      [(ngModel)]="searchName"
-      (input)="friendsSearchList = []"
-      #friendNameInput
-    />
-  </div>
-  <button
-    type="button"
-    class="search-form_button"
-    (click)="searchFriend(searchName)"
-  >
-    Search
-  </button>
-</div>
+<app-search
+  (onClickEvent)="searchFriend($event)"
+  (inputEvent)="fillField($event)"
+></app-search>
 
 <div *ngIf="searchName.trim().length === 0; else searchList">
-  <div class="user-list" *ngIf="friendsList$ | async as friendsList">
+  <div class="user-list" *ngIf="friendsList">
     <h2>My Friends</h2>
     <div>
       <app-friend-item
         *ngFor="let friend of friendsList"
         [friend]="friend"
+        (remove)="removeFromList($event)"
       ></app-friend-item>
     </div>
 
@@ -41,11 +23,12 @@
 
 <ng-template #searchList>
   <div class="user-list">
-    <h2>Search Field: {{ searchName.trim() }}</h2>
+    <h2>Search Field: {{ searchName }}</h2>
     <div>
       <app-friend-item
-        *ngFor="let friend of friendsSearchList"
+        *ngFor="let friend of friendsList"
         [friend]="friend"
+        (remove)="removeFromList($event)"
       ></app-friend-item>
     </div>
   </div>

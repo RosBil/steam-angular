@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Friend } from '../shared/interfaces/friend.interface';
 import { FriendsServices } from '../shared/services/friend.service';
 
@@ -9,21 +8,32 @@ import { FriendsServices } from '../shared/services/friend.service';
   styleUrls: ['./friends.component.scss'],
 })
 export class FriendsComponent implements OnInit {
-  friendsList$!: Observable<Friend[]>;
-
-  friendsSearchList: Friend[] = [];
-
+  friendsList: Friend[] = [];
   searchName = '';
 
   constructor(private friendsService: FriendsServices) {}
 
+  fillField(name: string) {
+    this.searchName = name;
+  }
+
+  getFriend() {
+    this.friendsService
+      .getMyFriends()
+      .subscribe((friends) => (this.friendsList = friends));
+  }
+
   searchFriend(name: string): void {
     this.friendsService.getFriendsByName(name).subscribe((friends) => {
-      this.friendsSearchList = friends;
+      this.friendsList = friends;
     });
   }
 
+  removeFromList(id: string) {
+    this.getFriend();
+  }
+
   ngOnInit(): void {
-    this.friendsList$ = this.friendsService.getMyFriends();
+    this.getFriend();
   }
 }
