@@ -5,15 +5,41 @@ import { FriendsComponent } from './friends/friends.component';
 import { GamesComponent } from './games/games.component';
 import { LibraryComponent } from './library/library.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/games', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'games', component: GamesComponent },
-  { path: 'library', component: LibraryComponent },
-  { path: 'friends', component: FriendsComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: '**', component: GamesComponent },
+  {
+    path: '',
+    redirectTo: '/games',
+    pathMatch: 'full'
+  }, {
+    path: 'games',
+    component: GamesComponent
+  }, {
+    path: 'library',
+    component: LibraryComponent,
+    canActivate: [
+      AuthGuard
+    ]
+  }, {
+    path: 'friends',
+    component: FriendsComponent,
+    canActivate: [
+      AuthGuard
+    ]
+  }, {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [
+      AuthGuard
+    ]
+  },  {
+    path: 'login',
+    component: LoginComponent
+  }, {
+    path: '**',
+    component: GamesComponent
+  },
 ];
 
 @NgModule({

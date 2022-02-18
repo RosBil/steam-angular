@@ -1,1 +1,55 @@
-<p>login works!</p>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+
+<div class="login-form">
+  <h2>Sign In</h2>
+
+  <form [formGroup]="formLogin" (ngSubmit)="login()">
+    <div>
+      <label for="">Email</label>
+      <input
+        type="email"
+        placeholder="Email"
+        formControlName="email"
+        [ngClass]="{
+          'has-error':
+            formLogin.get('email')?.invalid && formLogin.get('email')?.touched
+        }"
+      />
+      <p *ngIf="email?.invalid && email?.touched">Email address is required</p>
+    </div>
+    <div class="form-group fontpassword">
+      <label for="">Password</label>
+      <input
+        [type]="showPasswordOnPress ? 'text' : 'password'"
+        placeholder="Password"
+        formControlName="pass"
+        [ngClass]="{
+          'has-error':
+            formLogin.get('pass')?.invalid && formLogin.get('pass')?.touched
+        }"
+      />
+      <i
+        class="fa fa-eye fontpassword-eye"
+        (mousedown)="showPasswordOnPress = !showPasswordOnPress"
+        (mouseup)="showPasswordOnPress = !showPasswordOnPress"
+        [class.hide]="showPasswordOnPress"
+      ></i>
+
+      <p *ngIf="password?.invalid && password?.touched">
+        <span *ngIf="formLogin.get('pass')?.errors?.['required']"
+          >Password is required</span
+        >
+        <span *ngIf="formLogin.get('pass')?.errors?.['minlength']"
+          >The password must be at least 6 characters long</span
+        >
+      </p>
+    </div>
+    <button class="btn-sign-in" type="submit">Sign In</button>
+  </form>
+  <!-- <a ((click)="register()" routerLinkActive="active-link"
+    >Create a Free Account</a
+  > -->
+</div>

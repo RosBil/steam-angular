@@ -2,6 +2,9 @@
 .header {
   display: flex;
   flex-direction: row;
+  position: sticky;
+  top: 0;
+  z-index: 999;
   align-items: center;
   padding: 8px 20px;
   height: 56px;
@@ -28,9 +31,17 @@
       margin-right: 0;
     }
   }
-  &-item, .active-link {
+  &-item,
+  .active-link {
     color: #6c69ff;
   }
+}
+
+.navbar-logout {
+  position: absolute;
+  font-size: 0.9em;
+  right: 30px;
+  top: 10px;
 }
 
 /* Header styles end */
