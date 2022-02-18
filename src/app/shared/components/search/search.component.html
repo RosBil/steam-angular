@@ -1,19 +1,19 @@
 <div class="search-form">
   <div class="search-form_input--container">
-    <label for="games-search" class="games-search_label">Search Games</label>
+    <label for="games-search" class="games-search_label">Search {{label}}</label>
     <input
       type="text"
       class="games-search_input"
-      id="games-search"
-      placeholder="Search Games"
+      placeholder="{{'Search ' + label}}"
       #searchData
-      (change)="updateSearchPhrase(searchData.value)"
+      (input)="fillField(searchData.value)"
     />
   </div>
   <button
     type="button"
     class="search-form_button"
-    (click)="searchGame()"
+    (click)="search(searchData.value); searchData.value =''"
+    [disabled]="!searchData.value.trim()"
   >
     Search
   </button>
