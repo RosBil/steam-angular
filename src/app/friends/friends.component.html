@@ -24,7 +24,11 @@
 
 <ng-template #searchList>
   <div class="user-list">
-    <h2>Search Field: {{ searchName }}</h2>
+    <div class="search-panel">
+      <h2>Search Field: {{ searchName }}</h2>
+      <button class="btn-inline" (click)="clearSearch()">clear search</button>
+    </div>
+
     <div>
       <app-friend-item
         *ngFor="let friend of friendsList"
