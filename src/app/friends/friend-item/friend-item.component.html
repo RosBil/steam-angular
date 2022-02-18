@@ -1,3 +1,9 @@
-<div>
-  <ng-content></ng-content>
+<div class="friend-item">
+  <p>{{ friend.isFriend ? friend.email : friend.nickname }}</p>
+  <button
+    [class.friend-item_button--delete]="friend.isFriend"
+    (click)="setFriend(friend)"
+  >
+  {{ friend.isFriend ? 'Remove Friend' : 'Add Friend' }}
+  </button>
 </div>
