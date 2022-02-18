@@ -10,6 +10,7 @@ import { FriendsServices } from '../shared/services/friend.service';
 export class FriendsComponent implements OnInit {
   friendsList: Friend[] = [];
   searchName = '';
+  label ='Friends'
 
   constructor(private friendsService: FriendsServices) {}
 

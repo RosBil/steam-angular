@@ -2,6 +2,7 @@
 <app-search
   (onClickEvent)="searchFriend($event)"
   (inputEvent)="fillField($event)"
+  [label]="label"
 ></app-search>
 
 <div *ngIf="searchName.trim().length === 0; else searchList">
