@@ -29,4 +29,14 @@ export class GamesFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+    
+  // getCheckedTags(): void {
+  //   this.checkedTags = [];
+  //   document
+  //     .querySelectorAll('input[class=tag-filter_item--checkbox]:checked')
+  //     .forEach((inputEl) => this.checkedTags.push(inputEl.id));
+  //   this.searchService.setTags(this.checkedTags);
+  //   console.log(this.checkedTags);
+  // }
+
 }

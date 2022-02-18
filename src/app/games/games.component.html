@@ -1,33 +1,9 @@
 <h2>Games</h2>
-<app-search></app-search>
+<app-search [label]="label" (onClickEvent)="searchGame($event)"></app-search>
 <h2>Featured Games</h2>
 <div class="games">
   <div class="games-list">
-    <div *ngFor="let game of gamesList" class="games-list_item">
-      <div class="game-header">
-        <h4 class="game-header_title">{{ game.title }}</h4>
-        <span class="game-header_price">{{ game.price }} UAH</span>
-      </div>
-      <div class="game-content">
-        <p class="game-content_desc">
-          {{ game.description }}
-        </p>
-        <button
-          *ngIf="game.inLibrary"
-          class="game-remove_button"
-          (click)="removeFromLibrary(game)"
-        >
-          Remove from Library
-        </button>
-        <button
-          *ngIf="!game.inLibrary"
-          class="game-add_button"
-          (click)="addToLibrary(game)"
-        >
-          Add to Library
-        </button>
-      </div>
-    </div>
+    <app-card-item *ngFor="let game of gamesList" [game]="game"></app-card-item>
   </div>
   <app-games-filter></app-games-filter>
 </div>
