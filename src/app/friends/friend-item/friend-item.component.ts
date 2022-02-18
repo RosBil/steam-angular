@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Friend } from 'src/app/shared/interfaces/friend.interface';
 import { FriendsServices } from 'src/app/shared/services/friend.service';
 
@@ -9,23 +9,24 @@ import { FriendsServices } from 'src/app/shared/services/friend.service';
 })
 export class FriendItemComponent implements OnInit {
   @Input() friend!: Friend;
+  @Output() remove: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private friendService: FriendsServices) {}
 
-  removeFriend(friend: Friend): void {
+  private changeStatus(friend: Friend, callback: any, status: boolean) {
     this.friendService
-      .setMyFriend({ ...friend, isFriend: false })
-      .subscribe(() => {
-        console.log(`You remove ${friend.nickname} from friends`);
-      });
+      .setMyFriend({ ...friend, isFriend: !status })
+      .subscribe(callback);
   }
 
-  addFriend(friend: Friend): void {
-    this.friendService
-      .setMyFriend({ ...friend, isFriend: true })
-      .subscribe(() => {
-        console.log(`You add ${friend.nickname} from friends`);
-      });
+  public setFriend(friend: Friend): void {
+    this.changeStatus(
+      friend,
+      () => {
+        this.remove.emit(friend.id);
+      },
+      friend.isFriend
+    );
   }
 
   ngOnInit(): void {}
