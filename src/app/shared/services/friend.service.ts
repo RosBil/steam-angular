@@ -24,9 +24,7 @@ export class FriendsServices {
   public getFriendsByName(name: string): Observable<Friend[]> {
     return this.getDate(
       (friend: any) =>
-        friend.nickname.toLowerCase().includes(name.trim().toLowerCase()) &&
-        friend.isFriend !== true
-    );
+        friend.nickname.toLowerCase().includes(name.trim().toLowerCase()));
   }
 
   public getMyFriends(): Observable<Friend[]> {
