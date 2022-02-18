@@ -10,11 +10,12 @@ import { FriendsServices } from '../shared/services/friend.service';
 export class FriendsComponent implements OnInit {
   friendsList: Friend[] = [];
   searchName = '';
-  label ='Friends'
+  label = 'Friends';
 
   constructor(private friendsService: FriendsServices) {}
 
   fillField(name: string) {
+    this.friendsList = []
     this.searchName = name;
   }
 
@@ -31,6 +32,11 @@ export class FriendsComponent implements OnInit {
   }
 
   removeFromList(id: string) {
+    this.friendsList = this.friendsList.filter((friend) => friend.id !== id);
+  }
+
+  clearSearch() {
+    this.searchName = '';
     this.getFriend();
   }
 
