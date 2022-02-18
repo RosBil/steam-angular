@@ -1,0 +1,33 @@
+.games-controls {
+  border-left: 1px solid black;
+  padding-left: 5px;
+}
+.price-filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px 5px 5px;  
+}
+.range_input,
+.range_input:hover,
+.range_input:active {
+  width: 80%;
+}
+.range_input--value {
+  padding: 5px;
+  text-align: left;
+}
+.tag-filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 120px;
+}
+.tag-filter_item--checkbox {
+  display: inline-flex;
+  width: fit-content;
+  margin: 5px;
+}
+.tag-filter_item--label {
+  display: inline-flex;
+}

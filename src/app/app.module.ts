@@ -10,7 +10,7 @@ import { LibraryModule } from './library/library.module';
 
 @NgModule({
   declarations: [
-    AppComponent    
+    AppComponent       
   ],
   imports: [
     BrowserModule,

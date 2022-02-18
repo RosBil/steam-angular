@@ -12,6 +12,10 @@ import { CardItemComponent } from './components/card-item/card-item.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    SearchComponent,
+    CardItemComponent
   ]
 })
 export class SharedModule { }

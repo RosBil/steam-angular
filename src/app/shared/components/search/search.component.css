@@ -1,0 +1,17 @@
+.search-form_input--container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: stretch;  
+}
+.search-form {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+}
+.games-search_input {
+  align-self: stretch;
+  width: 100%;
+}

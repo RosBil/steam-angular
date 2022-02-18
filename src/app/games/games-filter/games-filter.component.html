@@ -1,1 +1,49 @@
-<p>games-filter works!</p>
+<div class="games-controls">
+  <div class="price-filter">
+    <h4 class="price-filter_title">Filter by price</h4>
+    <input
+      type="range"
+      class="range_input"
+      min="0"
+      max="2000"
+      #rangeInput
+      (change)="onRangeChange(rangeInput.value)"
+    />
+    <span class="range_input--value" id="rangeValue" [textContent]="rangeValue">0</span>
+  </div>
+  <div class="tag-filter" (click)="getCheckedTags()">
+    <h4 class="tag-filter_title">Filter by tag</h4>
+    <div class="tag-filter_item">
+      <input
+        type="checkbox"
+        class="tag-filter_item--checkbox"
+        id="indie"
+        name="indie"
+      />
+      <label for="indie" class="tag-filter_item--label">Indie</label>
+    </div>
+    <div class="tag-filter_item">
+      <input
+        type="checkbox"
+        class="tag-filter_item--checkbox"
+        id="action"
+        name="action"
+      />
+      <label for="action" class="tag-filter_item--label">Action</label>
+    </div>
+    <div class="tag-filter_item">
+      <input
+        type="checkbox"
+        class="tag-filter_item--checkbox"
+        id="adventure"
+        name="adventure"
+      />
+      <label for="adventure" class="tag-filter_item--label">Adventure</label>
+    </div>
+    <label class="checkbox-button">
+      <input type="checkbox" class="checkbox-button__input" />
+      <span class="checkbox-button__control"></span>
+      <span class="checkbox-button__label">Indie</span>
+    </label>
+  </div>
+</div>
