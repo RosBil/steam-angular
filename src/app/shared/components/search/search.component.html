@@ -1,1 +1,20 @@
-<p>search works!</p>
+<div class="search-form">
+  <div class="search-form_input--container">
+    <label for="games-search" class="games-search_label">Search Games</label>
+    <input
+      type="text"
+      class="games-search_input"
+      id="games-search"
+      placeholder="Search Games"
+      #searchData
+      (change)="updateSearchPhrase(searchData.value)"
+    />
+  </div>
+  <button
+    type="button"
+    class="search-form_button"
+    (click)="searchGame()"
+  >
+    Search
+  </button>
+</div>

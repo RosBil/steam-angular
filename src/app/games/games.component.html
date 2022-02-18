@@ -1,16 +1,5 @@
 <h2>Games</h2>
-<div class="search-form">
-  <div class="search-form_input--container">
-    <label for="games-search" class="games-search_label">Search Games</label>
-    <input
-      type="text"
-      class="games-search_input"
-      id="games-search"
-      placeholder="Search Games"
-    #searchData/>
-  </div>
-  <button type="button" class="search-form_button" (click)=searchGame(searchData.value)>Search</button>
-</div>
+<app-search></app-search>
 <h2>Featured Games</h2>
 <div class="games">
   <div class="games-list">
@@ -23,45 +12,22 @@
         <p class="game-content_desc">
           {{ game.description }}
         </p>
-        <button class="game-library_button">Add to Library</button>
+        <button
+          *ngIf="game.inLibrary"
+          class="game-remove_button"
+          (click)="removeFromLibrary(game)"
+        >
+          Remove from Library
+        </button>
+        <button
+          *ngIf="!game.inLibrary"
+          class="game-add_button"
+          (click)="addToLibrary(game)"
+        >
+          Add to Library
+        </button>
       </div>
     </div>
   </div>
-  <div class="games-controls">
-    <div class="price-filter">
-      <h4 class="price-filter_title">Filter by price</h4>
-      <input type="range" class="range_input" />
-      <span class="range_input--value" id="rangeValue">range value</span>
-    </div>
-    <div class="tag-filter">
-      <h4 class="tag-filter_title">Filter by tag</h4>
-      <div class="tag-filter_item">
-        <input
-          type="checkbox"
-          class="tag-filter_item--checkbox"
-          id="indie"
-          name="indie"
-        />
-        <label for="indie" class="tag-filter_item--label">Indie</label>
-      </div>
-      <div class="tag-filter_item">
-        <input
-          type="checkbox"
-          class="tag-filter_item--checkbox"
-          id="action"
-          name="action"
-        />
-        <label for="action" class="tag-filter_item--label">Action</label>
-      </div>
-      <div class="tag-filter_item">
-        <input
-          type="checkbox"
-          class="tag-filter_item--checkbox"
-          id="adventure"
-          name="adventure"
-        />
-        <label for="adventure" class="tag-filter_item--label">Adventure</label>
-      </div>
-    </div>
-  </div>
+  <app-games-filter></app-games-filter>
 </div>
