@@ -3,7 +3,7 @@
 <h2>Featured Games</h2>
 <div class="games">
   <div class="games-list">
-    <app-card-item *ngFor="let game of gamesList" [game]="game"></app-card-item>
+    <app-card-item *ngFor="let game of gamesList" [game]="game" [isLoggedIn]="isLoggedIn"></app-card-item>
   </div>
   <div class="games-filter">
     <app-games-filter></app-games-filter>

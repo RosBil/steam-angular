@@ -8,19 +8,19 @@
       {{ game.description }}
     </p>
     <div class="game-button-control" *ngIf="!game.inLibrary; else inLibrary">
-      <button class="game-add_button" (click)="addToLibrary(game)">
+      <button class="game-add_button" (click)="addToLibrary(game)" *ngIf="isLoggedIn">
         Add to Library
       </button>
     </div>
     <ng-template #inLibrary>
-      <div class="game-button-control_library">
+      <div class="game-button-control_library" *ngIf="isLoggedIn">
         <button class="controls_button game-download_button">Download</button>
         <button class="controls_button game-share_button">Share</button>
       </div>
     </ng-template>
   </div>
   <button
-    *ngIf="game.inLibrary"
+    *ngIf="game.inLibrary && isLoggedIn"
     class="game-remove_button"
     (click)="removeFromLibrary(game)"
     title="remove from library"
