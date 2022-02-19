@@ -7,19 +7,24 @@
     <p class="game-content_desc">
       {{ game.description }}
     </p>
-    <button
-      *ngIf="game.inLibrary"
-      class="game-remove_button  btn-warm"
-      (click)="removeFromLibrary(game)"
-    >
-      Remove from Library
-    </button>
-    <button
-      *ngIf="!game.inLibrary"
-      class="game-add_button"
-      (click)="addToLibrary(game)"
-    >
-      Add to Library
-    </button>
+    <div class="game-button-control" *ngIf="!game.inLibrary; else inLibrary">
+      <button class="game-add_button" (click)="addToLibrary(game)">
+        Add to Library
+      </button>
+    </div>
+    <ng-template #inLibrary>
+      <div class="game-button-control_library">
+        <button class="controls_button game-download_button">Download</button>
+        <button class="controls_button game-share_button">Share</button>
+      </div>
+    </ng-template>
   </div>
+  <button
+    *ngIf="game.inLibrary"
+    class="game-remove_button"
+    (click)="removeFromLibrary(game)"
+    title="remove from library"
+  >
+    &#10005;
+  </button>
 </div>

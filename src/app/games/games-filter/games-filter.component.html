@@ -4,29 +4,52 @@
     <input
       type="range"
       class="range_input"
-      min="0"
+      min="250"
       max="2000"
       step="50"
+      value="2000"
       #rangeInput
       (change)="onRangeChange(rangeInput.value)"
     />
-    <span class="range_input--value" id="rangeValue" [textContent]="rangeValue">0</span>
+    <span
+      class="range_input--value"
+      id="rangeValue"
+      [textContent]="rangeValue === 2000 ? 'Any price' : rangeValue"
+    ></span>
   </div>
-  <div class="tag-filter">    
-    <label class="checkbox-button" >
-      <input type="checkbox" class="checkbox-button__input" name="indie" (change)="toggleTag($event)"/>
-      <span class="checkbox-button__control"></span>
-      <span class="checkbox-button__label">Indie</span>
-    </label>
-    <label class="checkbox-button"  >
-      <input type="checkbox" class="checkbox-button__input" name="action" (change)="toggleTag($event)"/>
-      <span class="checkbox-button__control"></span>
-      <span class="checkbox-button__label">Action</span>
-    </label>
-    <label class="checkbox-button" >
-      <input type="checkbox" class="checkbox-button__input" name="adventure" (change)="toggleTag($event)"/>
-      <span class="checkbox-button__control"></span>
-      <span class="checkbox-button__label">Adventure</span>
-    </label>
+  <div class="tag-filter">
+    <h4 class="tag-filter_title">Filter by tag</h4>
+    <div class="checkbox-wrap">
+      <label class="checkbox-button">
+        <input
+          type="checkbox"
+          class="checkbox-button__input"
+          name="indie"
+          (change)="toggleTag($event)"
+        />
+        <span class="checkbox-button__control"></span>
+        <span class="checkbox-button__label">Indie</span>
+      </label>
+      <label class="checkbox-button">
+        <input
+          type="checkbox"
+          class="checkbox-button__input"
+          name="action"
+          (change)="toggleTag($event)"
+        />
+        <span class="checkbox-button__control"></span>
+        <span class="checkbox-button__label">Action</span>
+      </label>
+      <label class="checkbox-button">
+        <input
+          type="checkbox"
+          class="checkbox-button__input"
+          name="adventure"
+          (change)="toggleTag($event)"
+        />
+        <span class="checkbox-button__control"></span>
+        <span class="checkbox-button__label">Adventure</span>
+      </label>
+    </div>
   </div>
 </div>
