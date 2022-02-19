@@ -4,7 +4,7 @@ import { SearchService } from 'src/app/shared/services/search.service';
 @Component({
   selector: 'app-games-filter',
   templateUrl: './games-filter.component.html',
-  styleUrls: ['./games-filter.component.css']
+  styleUrls: ['./games-filter.component.scss']
 })
 export class GamesFilterComponent {
   checkedTags: string[] = [];
