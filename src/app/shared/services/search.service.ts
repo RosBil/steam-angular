@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
-
 import { Game } from "../interfaces/game.interface";
 import { GamesServices } from "./game.service";
 
@@ -11,7 +10,8 @@ export class SearchService {
   searchPhrase: string = '';
   priceRange: number = 2000;
   gameList: Game[] = [];
- 
+  filteredGameList: Game[] = [];
+
   private gamesSource = new BehaviorSubject<Game[]>([]);
   currentGames = this.gamesSource.asObservable();
 
@@ -22,6 +22,14 @@ export class SearchService {
   }
   setTags(tagArr: string[]): void {
     this.tagList = tagArr.slice();
+  }
+  addTag(tag: string): void {
+    if (!this.tagList.includes(tag)) {
+      this.tagList.push(tag);
+    }
+  }
+  removeTag(tag: string): void {
+    this.tagList = this.tagList.filter((tagEl) => tagEl !== tag.trim());
   }
   setSearchPhrase(phrase: string): void {
     this.searchPhrase = phrase;
@@ -39,17 +47,20 @@ export class SearchService {
   }
   setGameList(games: Game[]): void {
     this.gamesSource.next(games.slice());
-    /* this.gameList = games.slice(); */
+  }
+  filterGames(): void {
+    this.filteredGameList = this.gameList.filter((game) => game.price <= this.priceRange);
+    if (this.tagList.length > 0) {
+      this.filteredGameList = this.filteredGameList.filter((game) => {
+        return this.tagList.some((tag: string) => tag === game.tag);
+      });
+    }
+    this.setGameList(this.filteredGameList);
   }
   search(): void {
     this.gameServices.getGamesByName(this.searchPhrase).subscribe((games) => {
-      this.gameList = games.filter((game) => game.price <= this.priceRange);
-      if (this.tagList.length > 0) {
-        this.gameList = this.gameList.filter((game) => {
-          return this.tagList.some((tag: string) => tag === game.tag);
-        });
-      } 
-      this.setGameList(this.gameList);
-    });
+      this.gameList = games.slice();
+      this.filterGames();
+    })
   }
 }
