@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Friend } from '../shared/interfaces/friend.interface';
 import { FriendsServices } from '../shared/services/friend.service';
 
@@ -7,28 +8,31 @@ import { FriendsServices } from '../shared/services/friend.service';
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss'],
 })
-export class FriendsComponent implements OnInit {
+export class FriendsComponent implements OnInit, OnDestroy {
   friendsList: Friend[] = [];
   searchName = '';
   label = 'Friends';
+  subscription: Subscription = new Subscription();
 
   constructor(private friendsService: FriendsServices) {}
 
   fillField(name: string) {
-    this.friendsList = []
+    this.friendsList = [];
     this.searchName = name;
   }
 
   getFriend() {
-    this.friendsService
+    this.subscription = this.friendsService
       .getMyFriends()
       .subscribe((friends) => (this.friendsList = friends));
   }
 
   searchFriend(name: string): void {
-    this.friendsService.getFriendsByName(name).subscribe((friends) => {
-      this.friendsList = friends;
-    });
+    this.subscription = this.friendsService
+      .getFriendsByName(name)
+      .subscribe((friends) => {
+        this.friendsList = friends;
+      });
   }
 
   removeFromList(id: string) {
@@ -42,5 +46,9 @@ export class FriendsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFriend();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

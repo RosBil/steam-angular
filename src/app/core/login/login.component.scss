@@ -42,3 +42,12 @@ input{
     color: #777;
   }
 }
+
+.form-control{
+  position: relative;
+  p{
+    position: absolute;
+    top: 60px;
+    left: 5px;
+  }
+}

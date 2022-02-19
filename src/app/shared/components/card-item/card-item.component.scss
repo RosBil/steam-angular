@@ -69,11 +69,13 @@ button {
     width: 50%;
   }
   &-share_button {
+    padding: 7px 0;
     width: 50%;
     background-color: transparent;
     color: #6c69ff;
     border: 1px solid #6c69ff;
     transition: all 0.3s linear;
+    outline: none;
     &:hover {
       background-color: #6c69ff;
       color: #fff;
@@ -83,8 +85,7 @@ button {
 
 @media screen and (max-width: 520px) {
   .game {
- 
-     &-button-control_library {
+    &-button-control_library {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -98,4 +99,3 @@ button {
     }
   }
 }
-
