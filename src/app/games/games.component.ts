@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Game } from '../shared/interfaces/game.interface';
+import { AuthService } from '../shared/services/auth.service';
 import { GamesServices } from '../shared/services/game.service';
 import { SearchService } from '../shared/services/search.service';
 
@@ -14,11 +15,13 @@ export class GamesComponent implements OnInit, OnDestroy {
   gamesList: Game[] = [];
   checkedTags: string[] = [];
   message: string = '';
+  isLoggedIn = false;
   subscription: Subscription = new Subscription();
 
   constructor(
     private gamesService: GamesServices,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private auth: AuthService
   ) { }
 
   getGames(): void {
@@ -42,6 +45,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.auth.isUserLoggedIn();
     this.searchGame('');
     this.subscription = this.searchService.currentGames.subscribe(
       (games) => (this.gamesList = games)

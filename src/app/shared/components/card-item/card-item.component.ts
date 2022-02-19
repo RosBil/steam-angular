@@ -10,6 +10,7 @@ import { SearchService } from '../../services/search.service';
 })
 export class CardItemComponent implements OnInit {
   @Input() game!: Game;
+  @Input() isLoggedIn: boolean;
   constructor(private gamesService: GamesServices, private searchService: SearchService) {}
 
   ngOnInit(): void {}
