@@ -140,7 +140,7 @@ input[type='checkbox'] {
 
 .checkbox-button__input {
     opacity: 0;
-    position: absolute;
+    /* position: absolute; */
 }
 
 .checkbox-button__control {
