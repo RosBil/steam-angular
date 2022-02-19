@@ -25,7 +25,7 @@ import { LibraryModule } from './library/library.module';
     FormsModule,
     FriendsModule,
     GamesModule,
-    CoreModule
+    CoreModule,
     LibraryModule
   ],
   providers: [],
