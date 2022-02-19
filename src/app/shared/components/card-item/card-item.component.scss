@@ -1,52 +1,45 @@
-.games-list_item {
+button {
+  width: 100%;
+}
+
+.game {
+  &-list_item {
     min-width: 170px;
     border-radius: 4px;
   }
-  .game-header {
+
+  &-header {
     position: relative;
     color: white;
     background-color: lightsteelblue;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     height: 150px;
+    &_title {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: 24px;
+      line-height: 28px;
+      font-weight: 400;
+    }
+    &_price {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      font-size: 24px;
+      line-height: 28px;
+    }
   }
-  .game-header_title {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 400;
-  }
-  .game-header_price {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    font-size: 24px;
-    line-height: 28px;
-  }
-  .game-content {
+  &-content {
     height: 170px;
     padding: 16px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    &_desc {
+      height: 115px;
+      font-size: 12px;
+      overflow-y: hidden;
+    }
   }
-  .game-content_desc {
-    height: 115px;
-    font-size: 12px;
-    overflow-y: hidden;
-  }
-  .game-add_button,
-  .game-remove_button
-   {
-    height: 32px;
-    font-size: 12px;
-    margin: 8px 0;
-    padding: 8px 0;
-    border-radius: 4px;
-    background-color: #6c69ff;
-    width: 100%;
-  }
-  .game-remove_button {
-    background-color:#ff6f6f;
-  }
+}
