@@ -1,31 +1,44 @@
+p {
+  color: red;
+  font-size: 0.8em;
+}
+
+h2{
+  text-align: center;
+}
+
+button{
+  width: 100%;
+}
+
+input{
+  margin-bottom: 20px;
+}
+
 .login-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 60px;
-}
-
-.btn-sign-in {
-  margin: 0 auto;
-  margin-top: 10px;
-  padding: 15px 75px;
 }
 
 .has-error {
   border: 1px solid red;
 }
-p {
-  color: red;
-  font-size: 0.8em;
-}
+
 .fontpassword {
   position: relative;
-}
 
-.fontpassword i {
-  font-size: 20px;
-  position: absolute;
-  right: 10px;
-  top: 32px;
+  i {
+    font-size: 16px;
+    line-height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 32px;
+    color: #777;
+  }
 }
