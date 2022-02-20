@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" *ngIf="router.url !== '/login'">
   <div class="header-logo">
     <a [routerLink]="mainPageLink" routerLinkActive="active-link">
       <img src="../assets/logo.png" alt="logo" class="header-logo-img" />
@@ -56,6 +56,6 @@
   </nav>
 </header>
 
-<main class="main">
+<main class="main" [ngClass]="{'no-header': router.url === '/login'}">
   <router-outlet></router-outlet>
 </main>

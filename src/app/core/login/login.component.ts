@@ -10,15 +10,15 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-   
-  
+
+
 export class LoginComponent implements OnInit {
 
   @Output() formData: EventEmitter<{
     email: string;
     password: string;
   }> = new EventEmitter();
-  
+
   responsedata: any;
   formLogin: FormGroup;
   emailValidation = true;
@@ -38,14 +38,14 @@ export class LoginComponent implements OnInit {
      localStorage.clear();
   }
 
-  
+
   ngOnInit(): void {
-   
+
   }
 
    async login() {
     const { email, pass } = this.formLogin.value;
-    
+
      await this.authService
       .login({
         email,
@@ -54,16 +54,6 @@ export class LoginComponent implements OnInit {
         .then(() => this.router.navigate(['/games']));
 
   };
-
-  // async register() {
-  //   const { email, pass } = this.formLogin.value;
-  //   await this.authService
-  //     .register({
-  //       email,
-  //       password: pass
-  //     })
-  //     .then(() => this.router.navigate(['/profile']));
-  // }
 
    get f(): { [key: string]: AbstractControl } {
     return this.formLogin.controls;
@@ -82,5 +72,5 @@ export class LoginComponent implements OnInit {
     return this.formLogin.get('password');
   }
 
-  
+
 }

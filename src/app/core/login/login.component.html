@@ -22,7 +22,8 @@
         formControlName="pass"
         [ngClass]="{
           'has-error':
-            formLogin.get('pass')?.invalid && formLogin.get('pass')?.touched
+            formLogin.get('pass')?.invalid && formLogin.get('pass')?.touched,
+           'minlength-error': formLogin.get('pass')?.errors?.['minlength']
         }"
       />
       <i
@@ -32,7 +33,7 @@
         [class.hide]="showPasswordOnPress"
       ></i>
 
-      <p *ngIf="password?.invalid && password?.touched">
+      <p>
         <span *ngIf="formLogin.get('pass')?.errors?.['required']"
           >Password is required</span
         >
@@ -43,7 +44,4 @@
     </div>
     <button class="btn-sign-in" type="submit">Sign In</button>
   </form>
-  <!-- <a ((click)="register()" routerLinkActive="active-link"
-    >Create a Free Account</a
-  > -->
 </div>

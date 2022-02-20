@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from './shared/services/auth.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit, OnDestroy{
   mainPageLink = '/login';
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +34,6 @@ export class AppComponent implements OnInit, OnDestroy{
 
   logout() {
     this.authService.logout();
-  }   
-  
+  }
+
 }
