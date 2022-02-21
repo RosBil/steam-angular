@@ -9,17 +9,12 @@ import { CoreModule } from './core/core.module';
 import { FriendsModule } from './friends/friends.module';
 import { GamesModule } from './games/games.module';
 import { LibraryModule } from './library/library.module';
-import { HttpClientModule  } from '@angular/common/http';
-
-import { FriendsServices } from './shared/services/friend.service';
-import { GamesServices } from './shared/services/game.service';
-import { SearchService } from './shared/services/search.service';
-import { AuthService } from './shared/services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
-    AppComponent,      
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,13 +26,7 @@ import { AuthService } from './shared/services/auth.service';
     GamesModule,
     LibraryModule
   ],
-  providers: [
-    FriendsServices, 
-    GamesServices,
-    SearchService,
-    AuthService
-  ],
-  
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
