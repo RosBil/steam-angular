@@ -1,7 +1,7 @@
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 import { Injectable } from '@angular/core';
-import { LoginData } from '../interfaces/login-data.interface';
+import { LoginData } from '../../shared/interfaces/login-data.interface';
 import { BehaviorSubject, Subject } from 'rxjs';
 import firebase from "firebase/compat";
 import User = firebase.User;

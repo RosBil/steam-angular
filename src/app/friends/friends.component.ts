@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Friend } from '../shared/interfaces/friend.interface';
-import { FriendsServices } from '../shared/services/friend.service';
+import { FriendsServices } from '../core/services/friend.service';
 
 @Component({
   selector: 'app-friends',

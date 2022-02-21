@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Game } from '../shared/interfaces/game.interface';
-import { AuthService } from '../shared/services/auth.service';
-import { SearchService } from '../shared/services/search.service';
+import { AuthService } from '../core/services/auth.service';
+import { SearchService } from '../core/services/search.service';
 
 @Component({
   selector: 'app-library',
@@ -19,18 +19,14 @@ export class LibraryComponent implements OnInit, OnDestroy {
     private auth: AuthService
   ) {}
 
-  getGames(): void {
-    this.gamesList = this.searchService.gameList.slice();
-  }
-
-  searchGame(name: string): void {
-    this.searchService.setSearchPhrase(name);
+  searchGame(): void {
+    this.searchService.setDefaultFilters();
     this.searchService.search();
   }
 
   ngOnInit(): void {
     this.isLoggedIn = this.auth.isUserLoggedIn();
-    this.searchGame('');
+    this.searchGame();
     this.subscription = this.searchService.currentGames.subscribe(
       (games) => (this.gamesList = games.filter(game => game.inLibrary))
     );
