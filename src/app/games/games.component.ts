@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Game } from '../shared/interfaces/game.interface';
 import { AuthService } from '../core/services/auth.service';
 import { SearchService } from '../core/services/search.service';
+import { ErrorMessage } from '../shared/interfaces/error.interface';
 
 @Component({
   selector: 'app-games',
@@ -12,10 +13,12 @@ import { SearchService } from '../core/services/search.service';
 })
 export class GamesComponent implements OnInit, OnDestroy {
   label = 'Games';
+  isErrorModalShown = false;
   gamesList: Game[] = [];
   checkedTags: string[] = [];
   message: string = '';
   isLoggedIn = false;
+  error: ErrorMessage;
   subscription: Subscription = new Subscription();
   errorSubscription: Subscription = new Subscription();
 
@@ -30,14 +33,22 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.searchService.setSearchPhrase(name);
     this.searchService.search();
   }
-
-  showAlert(message: string) {
-    if (message?.length) {
-      alert(message);
-      this.router.navigate(['games']);
+  showModal(): void {
+    this.isErrorModalShown = true;
+  }
+  hideModal(): void {
+    this.isErrorModalShown = false;
+  }
+  showErrorMessage(error: ErrorMessage): void {
+    if (error) {      
+      this.error = error;
+      this.showModal();
+      setTimeout(() => {
+        this.hideModal();
+        this.router.navigate(['games']);
+      }, 3000)
     }
   }
-
   ngOnInit(): void {
     this.searchService.setDefaultFilters();
     this.isLoggedIn = this.auth.isUserLoggedIn();
@@ -46,7 +57,7 @@ export class GamesComponent implements OnInit, OnDestroy {
       (games) => (this.gamesList = games)
     );
     this.errorSubscription = this.route.data.subscribe((message) => {
-      this.showAlert(message['error']);
+      this.showErrorMessage(message['error']);
     });
   }
   ngOnDestroy(): void {

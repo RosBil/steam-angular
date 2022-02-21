@@ -14,7 +14,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/games', pathMatch: 'full' },
   {
     path: '**', component: GamesComponent, data: {
-      error: '404 Error. Page not found'
+      error: {
+        title: '404 Error. Page not found',
+        message: "The page you are looking for doesn't exist."
+      }
     }
   },
 ];
