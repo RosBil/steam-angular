@@ -7,9 +7,10 @@ import { FriendsServices } from 'src/app/shared/services/friend.service';
   templateUrl: './friend-item.component.html',
   styleUrls: ['./friend-item.component.scss'],
 })
-export class FriendItemComponent implements OnInit {
+export class FriendItemComponent {
   @Input() friend!: Friend;
   @Output() remove: EventEmitter<string> = new EventEmitter<string>();
+
 
   constructor(private friendService: FriendsServices) {}
 
@@ -28,6 +29,4 @@ export class FriendItemComponent implements OnInit {
       friend.isFriend
     );
   }
-
-  ngOnInit(): void {}
 }
