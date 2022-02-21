@@ -39,19 +39,24 @@
         >
       </li>
     </ul>
-    <div class="navbar-logout" *ngIf="isAuthorized">
-      <a
-        (click)="logout()"
-        class="navbar-link"
-        routerLink="/login"
-        routerLinkActive="active-link"
-        >Logout</a
+    <div class="navbar-logout">
+      <span *ngIf="isAuthorized; else signIn"
+        ><a
+          (click)="logout()"
+          class="navbar-link"
+          routerLink="/login"
+          routerLinkActive="active-link"
+          >Logout</a
+        ></span
       >
-    </div>
-    <div class="navbar-logout" *ngIf="!isAuthorized">
-      <a class="navbar-link" routerLink="/login" routerLinkActive="active-link"
-        >Sign In</a
-      >
+      <ng-template #signIn>
+        <a
+          class="navbar-link"
+          routerLink="/login"
+          routerLinkActive="active-link"
+          >Sign In
+        </a>
+      </ng-template>
     </div>
   </nav>
 </header>
@@ -59,3 +64,5 @@
 <main class="main">
   <router-outlet></router-outlet>
 </main>
+
+<button class="on-top" (click)="onTop()">&#x2191;</button>

@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 10px 5px 5px;
+  padding-bottom: 10px;
 }
 
 .checkbox-wrap {
@@ -46,4 +46,16 @@
 }
 .tag-filter_item--label {
   display: inline-flex;
+}
+
+@media screen and (max-width: 700px) {
+  .range_input--value {
+    margin-bottom: 0px;
+  }
+
+  .checkbox-wrap{
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+  }
 }
