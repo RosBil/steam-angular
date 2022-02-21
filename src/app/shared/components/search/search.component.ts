@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GamesServices } from '../../services/game.service';
-import { SearchService } from '../../services/search.service';
+import { GamesServices } from '../../../core/services/game.service';
+import { SearchService } from '../../../core/services/search.service';
 
 @Component({
   selector: 'app-search',

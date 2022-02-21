@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Friend } from 'src/app/shared/interfaces/friend.interface';
-import { FriendsServices } from 'src/app/shared/services/friend.service';
+import { FriendsServices } from 'src/app/core/services/friend.service';
 
 @Component({
   selector: 'app-friend-item',

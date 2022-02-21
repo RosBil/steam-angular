@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
-import { Game } from "../interfaces/game.interface";
+import { Game } from "../../shared/interfaces/game.interface";
 import { GamesServices } from "./game.service";
 
 @Injectable({ providedIn: "root" })

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Game } from '../shared/interfaces/game.interface';
-import { AuthService } from '../shared/services/auth.service';
-import { SearchService } from '../shared/services/search.service';
+import { AuthService } from '../core/services/auth.service';
+import { SearchService } from '../core/services/search.service';
 
 @Component({
   selector: 'app-library',
