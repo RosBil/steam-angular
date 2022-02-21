@@ -1,7 +1,7 @@
 <div class="game-list_item game">
   <div class="game-header">
     <h4 class="game-header_title">{{ game.title }}</h4>
-    <span class="game-header_price">{{ game.price }} UAH</span>
+    <span class="game-header_price" *ngIf="!game.inLibrary">{{ game.price }} UAH</span>
   </div>
   <div class="game-content">
     <p class="game-content_desc">
