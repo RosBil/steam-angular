@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from "../shared/services/auth.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
+import {AuthService} from "../core/services/auth.service";
 
 @Component({
   selector: 'app-profile',
@@ -29,19 +29,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.userEmail = this.userInfo?.['user']?.email || '';
     this.userName = this.userInfo?.['user']?.displayName || '';
-    this.userAge = this.userInfo?.['user']?.age || '';
+    this.userAge = this.userInfo?.['user']?.userAge || '';
 
     this.userData = this.fb.group({
       displayName: new FormControl(this.userName, [Validators.minLength(2)]),
       email: new FormControl(this.userEmail, [Validators.required, Validators.email]),
-      age: new FormControl(this.userAge, [
-        Validators.min(16),
+      userAge: new FormControl(this.userAge, [
+        Validators.min(12),
         Validators.max(100),
         Validators.pattern(/\-?\d*\.?\d{1,2}/)])
     });
 
     this.formValueChanged$$ = this.userData.valueChanges.subscribe((values) => {
-      if (values?.displayName === this.userName && values.age === this.userAge) {
+      if (values?.displayName === this.userName && values.userAge === this.userAge) {
         this.userData.markAsPristine();
       }
     });
@@ -51,28 +51,40 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.formValueChanged$$.unsubscribe();
   }
 
+    // const authFb = getAuth();
+    //
+    //   updateProfile(authFb.currentUser, {
+    //   displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+    // }).then(() => {
+    //   // Profile updated!
+    //   // ...
+    // }).catch((error) => {
+    //   // An error occurred
+    //   // ...
+    // });
+
   editUserProfile() {
     const user = this.userInfo?.['user'];
 
     if (user) {
       user.displayName = this.userData.get('displayName')?.value;
-      user.age = this.userData.get('age')?.value;
+      user.userAge = this.userData.get('userAge')?.value;
 
-      this.authService.updateProfile(this.userInfo);
+      this.authService.updateProfile(user).then(() => {
+        const info: any = window.localStorage.getItem('loginInfo');
+        const userUpdatedInfo = JSON.parse(info) || {};
 
-      const info: any = window.localStorage.getItem('loginInfo');
-      const userUpdatedInfo = JSON.parse(info) || {};
+        this.userName =  userUpdatedInfo?.user?.displayName;
+        this.userAge = userUpdatedInfo?.user?.userAge;
 
-      this.userName =  userUpdatedInfo?.user?.displayName;
-      this.userAge = userUpdatedInfo?.user?.age;
+        this.userData.setValue({
+          displayName: userUpdatedInfo?.user?.displayName,
+          email: this.userEmail,
+          userAge:  userUpdatedInfo?.user?.userAge,
+        });
 
-      this.userData.setValue({
-        displayName: userUpdatedInfo?.user?.displayName,
-        email: this.userEmail,
-        age:  userUpdatedInfo?.user?.age,
+        this.userData.markAsPristine();
       });
-
-      this.userData.markAsPristine();
     }
   }
 

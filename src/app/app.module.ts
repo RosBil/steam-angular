@@ -24,11 +24,9 @@ import {ProfileModule} from "./profile/profile.module";
     ReactiveFormsModule,
     HttpClientModule,
     CoreModule,
-    FriendsModule,
-    GamesModule,
     CoreModule,
-    LibraryModule,
-    ProfileModule
+    ProfileModule,
+    GamesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

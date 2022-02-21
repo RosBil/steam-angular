@@ -15,6 +15,9 @@ import {BrowserModule} from "@angular/platform-browser";
     FormsModule,
     BrowserModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    ProfileComponent
   ]
 })
 export class ProfileModule { }
