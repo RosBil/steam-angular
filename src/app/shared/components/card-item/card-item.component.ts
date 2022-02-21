@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Game } from '../../interfaces/game.interface';
-import { GamesServices } from '../../services/game.service';
-import { SearchService } from '../../services/search.service';
+import { GamesServices } from '../../../core/services/game.service';
+import { SearchService } from '../../../core/services/search.service';
 
 @Component({
   selector: 'app-card-item',

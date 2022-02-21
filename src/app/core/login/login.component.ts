@@ -2,7 +2,7 @@ import { Component, ContentChild, EventEmitter, OnInit, Output } from '@angular/
 import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginData } from 'src/app/shared/interfaces/login-data.interface';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 @Component({
