@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Game } from '../shared/interfaces/game.interface';
 import { AuthService } from '../shared/services/auth.service';
-import { GamesServices } from '../shared/services/game.service';
+/* import { GamesServices } from '../shared/services/game.service'; */
 import { SearchService } from '../shared/services/search.service';
 
 @Component({
@@ -21,32 +21,32 @@ export class GamesComponent implements OnInit, OnDestroy {
   errorSubscription: Subscription = new Subscription();
 
   constructor(
-    private gamesService: GamesServices,
+    /* private gamesService: GamesServices, */
     private searchService: SearchService,
     private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
-  getGames(): void {
+  /* getGames(): void {
     this.gamesList = this.searchService.gameList.slice();
-  }
+  } */
 
   searchGame(name: string): void {
     this.searchService.setSearchPhrase(name);
     this.searchService.search();
   }
 
-  searchGameByPrice(price: number): void {
+  /* searchGameByPrice(price: number): void {
     this.gamesService
       .getGamesByPrice(price)
       .subscribe((data) => (this.gamesList = data));
-  }
-  searchByTag(tagArr: string[]): void {
+  } */
+  /* searchByTag(tagArr: string[]): void {
     this.gamesService
       .getGamesByTag(tagArr)
       .subscribe((data) => (this.gamesList = data));
-  }
+  } */
   showAlert(message: string) {
     if (message?.length) {
       alert(message);
@@ -55,6 +55,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.searchService.setDefaultFilters();
     this.isLoggedIn = this.auth.isUserLoggedIn();
     this.searchGame('');
     this.subscription = this.searchService.currentGames.subscribe(

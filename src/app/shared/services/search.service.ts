@@ -6,20 +6,17 @@ import { GamesServices } from "./game.service";
 
 @Injectable({ providedIn: "root" })
 export class SearchService {
-  tagList: string[] = [];
-  searchPhrase: string = '';
-  priceRange: number = 2000;
-  gameList: Game[] = [];
-  filteredGameList: Game[] = [];
+  private tagList: string[] = [];
+  private searchPhrase: string = '';
+  private priceRange: number = 2000;
+  private gameList: Game[] = [];
+  private filteredGameList: Game[] = [];
 
   private gamesSource = new BehaviorSubject<Game[]>([]);
   currentGames = this.gamesSource.asObservable();
 
   constructor(private gameServices: GamesServices) { }
 
-  getTags(): string[] {
-    return this.tagList.slice();
-  }
   setTags(tagArr: string[]): void {
     this.tagList = tagArr.slice();
   }
@@ -42,11 +39,13 @@ export class SearchService {
       this.priceRange = value;
     }
   }
-  getPriceRange(): number {
-    return this.priceRange;
-  }
   setGameList(games: Game[]): void {
     this.gamesSource.next(games.slice());
+  }
+  setDefaultFilters(): void {
+    this.setTags([]);
+    this.setPriceRange(2000);
+    this.setSearchPhrase('');
   }
   filterGames(): void {
     this.filteredGameList = this.gameList.filter((game) => game.price <= this.priceRange);
