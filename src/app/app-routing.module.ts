@@ -6,17 +6,21 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
-  {path: 'games', loadChildren: () => import('./games/games.module').then(m => m.GamesModule)}, 
-  {path: 'library', loadChildren: () => import('./library/library.module').then(m => m.LibraryModule), canActivate: [AuthGuard]},
-  {path: 'friends', loadChildren: () => import('./friends/friends.module').then(m => m.FriendsModule), canActivate: [AuthGuard]},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}, 
-  {path: 'login', component: LoginComponent}, 
-  {path: '', redirectTo: '/games', pathMatch: 'full'}, 
-  {path: '**', component: GamesComponent},
+  { path: 'games', loadChildren: () => import('./games/games.module').then(m => m.GamesModule) },
+  { path: 'library', loadChildren: () => import('./library/library.module').then(m => m.LibraryModule), canActivate: [AuthGuard] },
+  { path: 'friends', loadChildren: () => import('./friends/friends.module').then(m => m.FriendsModule), canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/games', pathMatch: 'full' },
+  {
+    path: '**', component: GamesComponent, data: {
+      error: '404 Error. Page not found'
+    }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

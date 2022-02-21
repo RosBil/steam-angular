@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Game } from '../shared/interfaces/game.interface';
 import { AuthService } from '../shared/services/auth.service';
@@ -17,11 +18,14 @@ export class GamesComponent implements OnInit, OnDestroy {
   message: string = '';
   isLoggedIn = false;
   subscription: Subscription = new Subscription();
+  errorSubscription: Subscription = new Subscription();
 
   constructor(
     private gamesService: GamesServices,
     private searchService: SearchService,
-    private auth: AuthService
+    private auth: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   getGames(): void {
@@ -43,6 +47,12 @@ export class GamesComponent implements OnInit, OnDestroy {
       .getGamesByTag(tagArr)
       .subscribe((data) => (this.gamesList = data));
   }
+  showAlert(message: string) {
+    if (message?.length) {
+      alert(message);
+      this.router.navigate(['games']);
+    }
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = this.auth.isUserLoggedIn();
@@ -50,6 +60,9 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.subscription = this.searchService.currentGames.subscribe(
       (games) => (this.gamesList = games)
     );
+    this.errorSubscription = this.route.data.subscribe((message) => {
+      this.showAlert(message['error']);
+    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
