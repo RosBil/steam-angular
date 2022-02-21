@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 
@@ -14,19 +14,22 @@ import { AuthService } from './shared/services/auth.service';
 
 
 import { LibraryModule } from './library/library.module';
+import {ProfileModule} from "./profile/profile.module";
 
 @NgModule({
   declarations: [
-    AppComponent       
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     FriendsModule,
     GamesModule,
     CoreModule,
-    LibraryModule
+    LibraryModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,13 +3,15 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Injectable } from '@angular/core';
 import { LoginData } from '../interfaces/login-data.interface';
 import { BehaviorSubject, Subject } from 'rxjs';
+import firebase from "firebase/compat";
+import User = firebase.User;
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private isLoggedIn: any = false;
-  
+
   loginInfo$ = new BehaviorSubject(false);
 
   constructor(public auth: AngularFireAuth) { }
@@ -19,8 +21,6 @@ export class AuthService {
 
     this.loginInfo$.next(this.isLoggedIn);
   }
-
- 
 
   login(loginData: LoginData) {
     return this.auth.signInWithEmailAndPassword(loginData.email, loginData.password)
@@ -37,10 +37,21 @@ export class AuthService {
   }
 
   logout() {
-    this.auth.signOut().then(() => {
+    return this.auth.signOut().then(() => {
       window.localStorage.removeItem('loginInfo');
       this.setLoginInfo(false);
     });
+  }
+
+  updateProfile(profile: any) {
+    let info = window.localStorage.getItem('loginInfo');
+    info = info ? JSON.parse(info) : info;
+
+    if (info) {
+      window.localStorage.removeItem('loginInfo');
+      window.localStorage.setItem('loginInfo', JSON.stringify(profile));
+    }
+    // return this.auth.updateCurrentUser(profile);
   }
 
   // register({ email, password }: LoginData) {
