@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { GamesComponent } from './games.component';
 import { GamesFilterComponent } from './games-filter/games-filter.component';
-import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { GamesRoutingModule } from './games-routing.module';
 
 @NgModule({
   declarations: [
@@ -11,9 +11,9 @@ import { SharedModule } from '../shared/shared.module';
     GamesFilterComponent
   ],
   imports: [
-    CommonModule,
-    HttpClientModule,
-    SharedModule
-  ]
+    CommonModule, 
+    SharedModule, 
+    GamesRoutingModule
+  ],
 })
-export class GamesModule { }
+export class GamesModule {}
