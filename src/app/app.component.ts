@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthService } from './core/services/auth.service';
 import {NavigationStart, Router} from "@angular/router";
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
   mainPageLink = '/login';
 
   constructor(
+    private authService: AuthService,
+    private viewport: ViewportScroller
     private authService: AuthService,
     public router: Router
   ) {}
@@ -34,6 +38,10 @@ export class AppComponent implements OnInit, OnDestroy {
     //     window.localStorage.clear();
     //   }
     // });
+  }
+
+  onTop(): void {
+    this.viewport.scrollToPosition([0, 0]);
   }
 
   ngOnDestroy(): void {
