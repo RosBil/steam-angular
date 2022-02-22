@@ -51,18 +51,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.formValueChanged$$.unsubscribe();
   }
 
-    // const authFb = getAuth();
-    //
-    //   updateProfile(authFb.currentUser, {
-    //   displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
-    // }).then(() => {
-    //   // Profile updated!
-    //   // ...
-    // }).catch((error) => {
-    //   // An error occurred
-    //   // ...
-    // });
-
   editUserProfile() {
     const user = this.userInfo?.['user'];
 

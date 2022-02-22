@@ -34,7 +34,7 @@
       ></i>
 
       <p>
-        <span *ngIf="formLogin.get('pass')?.errors?.['required']"
+        <span *ngIf="formLogin.get('pass')?.errors?.['required'] && formLogin.get('pass')?.touched"
           >Password is required</span
         >
         <span *ngIf="formLogin.get('pass')?.errors?.['minlength']"

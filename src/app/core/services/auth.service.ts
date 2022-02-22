@@ -10,9 +10,9 @@ import {User} from "../../shared/interfaces/user.interface";
   providedIn: 'root',
 })
 export class AuthService {
-  loginInfo$ = new BehaviorSubject(false);
+  loginInfo$ = new BehaviorSubject(!!window.localStorage.getItem('loginInfo'));
 
-  private isLoggedIn: any = false;
+  private isLoggedIn: any = !!window.localStorage.getItem('loginInfo');
   private usersExtendedData: Array<any> = [];
 
   constructor(public auth: AngularFireAuth,

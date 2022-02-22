@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription}  from 'rxjs';
+import {filter, Subscription} from 'rxjs';
 import { AuthService } from './core/services/auth.service';
-import { Router } from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import { ViewportScroller } from '@angular/common';
 
 @Component({
@@ -30,6 +30,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
       this.setMainPageLink();
     });
+
+    // this.router.events
+    //   .pipe(filter(event => event instanceof NavigationEnd))
+    //   .subscribe((event)=>{
+    //   console.log(event);
+    //
+    // })
 
     // this.router.events.subscribe(event => {
     //   if (event instanceof NavigationStart) {

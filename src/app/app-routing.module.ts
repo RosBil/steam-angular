@@ -7,9 +7,14 @@ import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   { path: 'games', component: GamesComponent },
-  { path: 'library', loadChildren: () => import('./library/library.module').then(m => m.LibraryModule), canActivate: [AuthGuard] },
-  { path: 'friends', loadChildren: () => import('./friends/friends.module').then(m => m.FriendsModule), canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'library', loadChildren: () =>
+      import('./library/library.module').then(m => m.LibraryModule),
+    canActivate: [AuthGuard] },
+  { path: 'friends', loadChildren: () =>
+      import('./friends/friends.module').then(m => m.FriendsModule),
+    canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent,
+    canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/games', pathMatch: 'full' },
   {
