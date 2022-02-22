@@ -7,8 +7,9 @@
 }
 
 .btn-sign-in {
-  margin-top: 20px;
-width: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 15px 75px;
 }
 
 .has-error {

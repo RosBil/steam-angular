@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserModule} from "@angular/platform-browser";
 
 
 
@@ -9,7 +11,13 @@ import { ProfileComponent } from './profile.component';
     ProfileComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    BrowserModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    ProfileComponent
   ]
 })
 export class ProfileModule { }
