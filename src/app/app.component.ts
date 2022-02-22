@@ -1,29 +1,39 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 import { AuthService } from './core/services/auth.service';
+import {NavigationStart, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent implements OnInit, OnDestroy {
   isLogin$$: Subscription;
-  isAuthorized = false;
+  isAuthorized = !!window.localStorage.getItem('loginInfo');
   title = 'steam-angular';
 
   mainPageLink = '/login';
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
+    this.setMainPageLink();
+
     this.isLogin$$ = this.authService.loginInfo$.subscribe((isLoggedIn: boolean) => {
       this.isAuthorized = isLoggedIn;
 
-      this.mainPageLink = this.isAuthorized ? '/profile' : '/login';
+      this.setMainPageLink();
     });
+
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationStart) {
+    //     window.localStorage.clear();
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {
@@ -32,6 +42,10 @@ export class AppComponent implements OnInit, OnDestroy{
 
   logout() {
     this.authService.logout();
-  }   
-  
+  }
+
+  private setMainPageLink() {
+    this.mainPageLink = this.isAuthorized ? '/games' : '/login';
+  }
+
 }

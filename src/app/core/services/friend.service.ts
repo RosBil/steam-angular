@@ -6,6 +6,7 @@ import { Friend } from '../../shared/interfaces/friend.interface';
 import { Game } from '../../shared/interfaces/game.interface';
 
 @Injectable({ providedIn: 'root' })
+
 export class FriendsServices {
   constructor(private http: HttpClient) {}
 

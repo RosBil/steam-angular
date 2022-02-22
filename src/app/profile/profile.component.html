@@ -1,25 +1,32 @@
 <div class="login-form">
   <h2>Profile</h2>
 
-  <form>
+  <form [formGroup]="userData"
+        (submit)="editUserProfile()">
     <div>
-      <label for="">Username</label>
-      <input type="text" placeholder="Username" />
-      <!-- <p *ngIf="email?.invalid && email?.touched">Email address is required</p> -->
+      <label>Username</label>
+      <input type="text"
+             placeholder="Username"
+             formControlName="displayName"
+      />
     </div>
     <div>
-      <label for="">Email</label>
+      <label>Email</label>
       <input
         type="email"
-        disabled
+        readonly
+        placeholder="email"
         formControlName="email"
-        value="{{ userEmail }}"
       />
     </div>
     <div class="form-group">
-      <label for="">Age</label>
-      <input type="text" placeholder="Age" />
+      <label>Age</label>
+      <input type="text"
+             placeholder="Age"
+             formControlName="userAge"/>
     </div>
-    <button class="btn-sign-in" type="submit">Save</button>
+    <button class="btn-edit"
+            [disabled]="!userData.valid || userData.pristine"
+            type="submit">Save</button>
   </form>
 </div>
