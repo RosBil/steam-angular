@@ -1,37 +1,42 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Game } from '../shared/interfaces/game.interface';
 import { AuthService } from '../core/services/auth.service';
-import { SearchService } from '../core/services/search.service';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { GamesServices } from '../core/services/game.service';
 
 @Component({
   selector: 'app-library',
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.scss'],
 })
-export class LibraryComponent implements OnInit, OnDestroy {
-  gamesList: Game[] = [];
+export class LibraryComponent implements OnInit {
+  gamesList$: Observable<Game[]>;
+  removedGamesIds$ = new BehaviorSubject<string[]>([]);
+
   isLoggedIn = true;
-  subscription: Subscription = new Subscription();
 
-  constructor(
-    private searchService: SearchService,
-    private auth: AuthService
-  ) {}
-
-  searchGame(): void {
-    this.searchService.setDefaultFilters();
-    this.searchService.search();
-  }
+  constructor(private auth: AuthService, private gamesService: GamesServices) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.auth.isUserLoggedIn();
-    this.searchGame();
-    this.subscription = this.searchService.currentGames.subscribe(
-      (games) => (this.gamesList = games.filter(game => game.inLibrary))
+    // this.gamesList$ = this.gamesService.getGamesInLibrary();
+    this.getAll()
+    this.gamesList$.subscribe((data) => console.log(data));
+  }
+
+  getAll(): void {
+    const allGame = this.gamesService.getGamesInLibrary();
+    this.gamesList$ = combineLatest([allGame, this.removedGamesIds$])
+    .pipe(
+      map(([games, removedIdList]: [Game[], string[]]) => {
+        return games.filter((game) => !removedIdList.includes(game.id || ''));
+      })
     );
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+
+  removeFromList(id: string): void {
+    this.removedGamesIds$.next([...this.removedGamesIds$.value, id || '']);
+    this.removedGamesIds$.subscribe(data => console.log(data)
+    )
   }
 }
