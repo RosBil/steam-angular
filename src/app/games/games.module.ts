@@ -11,8 +11,8 @@ import { GamesRoutingModule } from './games-routing.module';
     GamesFilterComponent
   ],
   imports: [
-    CommonModule, 
-    SharedModule, 
+    CommonModule,
+    SharedModule,
     GamesRoutingModule
   ],
 })

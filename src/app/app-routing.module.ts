@@ -6,19 +6,31 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
-  { path: 'games', component: GamesComponent },
-  { path: 'library', loadChildren: () =>
-      import('./library/library.module').then(m => m.LibraryModule),
-    canActivate: [AuthGuard] },
-  { path: 'friends', loadChildren: () =>
-      import('./friends/friends.module').then(m => m.FriendsModule),
-    canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent,
-    canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/games', pathMatch: 'full' },
   {
-    path: '**', component: GamesComponent,
+    path: 'games',
+    component: GamesComponent
+  }, {
+    path: 'library',
+    loadChildren: () => import('./library/library.module').then(m => m.LibraryModule),
+    canActivate: [AuthGuard]
+  }, {
+    path: 'friends',
+    loadChildren: () => import('./friends/friends.module').then(m => m.FriendsModule),
+    canActivate: [AuthGuard]
+  }, {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  }, {
+    path: 'login',
+    component: LoginComponent
+  }, {
+    path: '',
+    redirectTo: '/games',
+    pathMatch: 'full'
+  }, {
+    path: '**',
+    component: GamesComponent,
     data: {
       error: {
         title: '404 Error. Page not found',

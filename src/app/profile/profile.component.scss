@@ -4,31 +4,32 @@
   justify-content: center;
   align-items: center;
   padding: 60px;
-}
 
-.btn-edit {
-  margin: 20px 0 10px;
-  width: 100%;
+  .btn-edit {
+    margin: 20px 0 10px;
+    width: 100%;
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: auto;
+    &:disabled {
+      opacity: 0.5;
+      cursor: auto;
+    }
   }
-}
 
-.has-error {
-  border: 1px solid red;
-}
-p {
-  color: red;
-  font-size: 0.8em;
-}
+  .has-error {
+    border: 1px solid red;
+  }
 
-input {
-  &:read-only {
-    border: 1px solid #ccc;
-    background: #eee;
-    color: #555;
-    outline: none;
+  p {
+    color: red;
+    font-size: 0.8em;
+  }
+
+  input {
+    &:read-only {
+      border: 1px solid #ccc;
+      background: #eee;
+      color: #555;
+      outline: none;
+    }
   }
 }

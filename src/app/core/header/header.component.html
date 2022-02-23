@@ -1,0 +1,65 @@
+<header class="header" *ngIf="router.url !== '/login'">
+  <div class="header-logo">
+    <a [routerLink]="mainPageLink" routerLinkActive="active-link">
+      <img src="../assets/logo.png" alt="logo" class="header-logo-img" />
+    </a>
+  </div>
+  <nav class="header-menu navbar">
+    <ul class="navbar-list">
+      <li class="navbar-item">
+        <a
+          class="navbar-link"
+          routerLink="/games"
+          routerLinkActive="active-link"
+        >Games</a
+        >
+      </li>
+      <li class="navbar-item" *ngIf="isAuthorized">
+        <a
+          class="navbar-link"
+          routerLink="/library"
+          routerLinkActive="active-link"
+        >Library</a
+        >
+      </li>
+      <li class="navbar-item" *ngIf="isAuthorized">
+        <a
+          class="navbar-link"
+          routerLink="/friends"
+          routerLinkActive="active-link"
+        >Friends</a
+        >
+      </li>
+      <li class="navbar-item" *ngIf="isAuthorized">
+        <a
+          class="navbar-link"
+          routerLink="/profile"
+          routerLinkActive="active-link"
+        >Profile</a
+        >
+      </li>
+    </ul>
+    <div class="navbar-logout">
+      <span *ngIf="isAuthorized; else signIn"
+      ><a
+        (click)="logout()"
+        class="navbar-link"
+        routerLink="/login"
+        routerLinkActive="active-link"
+      >Logout</a
+      ></span
+      >
+      <ng-template #signIn>
+        <a
+          class="navbar-link"
+          routerLink="/login"
+          routerLinkActive="active-link"
+        >Sign In
+        </a>
+      </ng-template>
+    </div>
+  </nav>
+</header>
+
+
+

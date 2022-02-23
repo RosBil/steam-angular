@@ -2,6 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {AuthService} from "../core/services/auth.service";
+import {LocalStorageService} from "../core/services/local-storage.service";
+import {LocalStorageKeys} from "../core/enums/local-storage-keys";
+import {UserDataInfo} from "../core/models/user-data-info";
+import {CurrentUserInfo} from "../core/models/current-user-info";
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +15,7 @@ import {AuthService} from "../core/services/auth.service";
 export class ProfileComponent implements OnInit, OnDestroy {
   userData: FormGroup;
 
-  userInfo: {[key: string]: any} | null = null;
+  userInfo: UserDataInfo | null = null;
   userEmail = '';
   userName = '';
   userAge = '';
@@ -19,19 +23,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private formValueChanged$$: Subscription;
 
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
-    const info = window.localStorage.getItem('loginInfo');
-    this.userInfo = info ? JSON.parse(info) : null;
+    this.userInfo = this.localStorageService.getParsedLocalStorageItem(LocalStorageKeys.loginInfo);
 
     this.userEmail = this.userInfo?.['user']?.email || '';
     this.userName = this.userInfo?.['user']?.displayName || '';
     this.userAge = this.userInfo?.['user']?.userAge || '';
 
-    this.userData = this.fb.group({
+    this.userData = this.formBuilder.group({
       displayName: new FormControl(this.userName, [Validators.minLength(2)]),
       email: new FormControl(this.userEmail, [Validators.required, Validators.email]),
       userAge: new FormControl(this.userAge, [
@@ -52,18 +56,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   editUserProfile() {
-    const user = this.userInfo?.['user'];
+    const user: Partial<CurrentUserInfo> = this.userInfo?.user || {};
 
     if (user) {
-      user.displayName = this.userData.get('displayName')?.value;
-      user.userAge = this.userData.get('userAge')?.value;
+      user.displayName = this.userData.get('displayName')?.value || '';
+      user.userAge = this.userData.get('userAge')?.value || '';
 
       this.authService.updateProfile(user).then(() => {
-        const info: any = window.localStorage.getItem('loginInfo');
-        const userUpdatedInfo = JSON.parse(info) || {};
+        const userUpdatedInfo: UserDataInfo =
+          this.localStorageService.getParsedLocalStorageItem(LocalStorageKeys.loginInfo);
 
-        this.userName =  userUpdatedInfo?.user?.displayName;
-        this.userAge = userUpdatedInfo?.user?.userAge;
+        this.userName = userUpdatedInfo?.user?.displayName || '';
+        this.userAge = userUpdatedInfo?.user?.userAge || '';
 
         this.userData.setValue({
           displayName: userUpdatedInfo?.user?.displayName,
