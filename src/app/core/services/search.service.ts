@@ -10,7 +10,6 @@ export class SearchService {
   private searchPhrase: string = '';
   private priceRange: number = 2000;
   private gameList: Game[] = [];
-  private filteredGameList: Game[] = [];
 
   private gamesSource = new BehaviorSubject<Game[]>([]);
   currentGames = this.gamesSource.asObservable();
@@ -48,13 +47,10 @@ export class SearchService {
     this.setSearchPhrase('');
   }
   filterGames(): void {
-    this.filteredGameList = this.gameList.filter((game) => game.price <= this.priceRange);
-    if (this.tagList.length > 0) {
-      this.filteredGameList = this.filteredGameList.filter((game) => {
-        return this.tagList.some((tag: string) => tag === game.tag);
-      });
-    }
-    this.setGameList(this.filteredGameList);
+    const filteredGames: Game[] = this.tagList.length > 0 ?
+    this.gameList.filter((game) => (game.price <= this.priceRange) && (this.tagList.includes(game.tag))) :
+    this.gameList.filter((game) => (game.price <= this.priceRange));
+    this.setGameList(filteredGames);
   }
   search(): void {
     this.gameServices.getGamesByName(this.searchPhrase).subscribe((games) => {

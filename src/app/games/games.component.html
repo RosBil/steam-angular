@@ -2,13 +2,16 @@
 <app-search [label]="label" (onClickEvent)="searchGame($event)"></app-search>
 <h2>Featured Games</h2>
 <div class="games">
-  <div class="games-list">
-    <app-card-item *ngFor="let game of gamesList" [game]="game" [isLoggedIn]="isLoggedIn"></app-card-item>
-  </div>
+  <div class="games-list" *ngIf="(games$ | async)?.length !== 0; else emptyList">
+    <app-card-item *ngFor="let game of games$ | async" [game]="game"></app-card-item>    
+  </div>  
   <div class="games-filter">
     <app-games-filter></app-games-filter>
   </div>
 </div>
+<ng-template #emptyList class="games-list_empty">
+  <p class="games-list_empty--message">0 games respond to your search request</p>    
+</ng-template>
 <div [ngClass]="{'error-modal': !isErrorModalShown, 'error-modal_shown': isErrorModalShown}">
   <h2 class="error-modal_title">{{error?.title}}</h2>
   <p class="error-modal_text">{{error?.message}}</p>
