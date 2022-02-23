@@ -9,11 +9,23 @@
   grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
   gap: 10px;
 }
-
+.games-list_empty {  
+  display: flex;  
+  flex-direction: column;
+  justify-content: center;
+  width: calc(80vw - 205px - 110px);
+  padding: 0 10px;
+  margin: 0 auto;
+}
+.games-list_empty--message{
+  width: calc(70vw - 210px);
+  padding-bottom: 20px;
+  color: #ff6f6f;
+  font-size: 18px;
+}
 .games-filter {
   min-width: 203.5px;
 }
-
 .error-modal {
   display: none;
 }

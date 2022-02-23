@@ -5,13 +5,11 @@
       <app-card-item
         *ngFor="let game of gamesList"
         [game]="game"
-        [isLoggedIn]="isLoggedIn"
         (remove)="removeFromList($event)"
       ></app-card-item>
     </div>
     <ng-template #emptyList>
-      <p>You don't have any game in your Library</p>
-      
+      <p>You don't have any game in your Library</p>      
     </ng-template>
   </div>
 </div>

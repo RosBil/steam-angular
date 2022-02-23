@@ -12,14 +12,14 @@ export class GamesServices {
 
   getGamesByName(name: string): Observable<Game[]> {
     return this.http.get<Game>(`${environment.firebase.databaseURL}/games.json`).pipe(
-      map((response: { [key: string]: any }) => {
-        return Object.keys(response).map((key) => ({
+      map((response: { [key: string]: any }) =>
+        Object.keys(response).map((key) => ({
           ...response[key],
-          id: key,
-        }));
-      }),
-      map((games) =>
-        games.filter((game) => game.title.toLowerCase().includes(name.trim().toLowerCase()))
+          id: key
+        }))
+      ),
+      map((games: Game[]): Game[] =>
+        games.filter((game) => game?.title?.toLowerCase().includes(name?.trim().toLowerCase()))
       )
     );
   }
