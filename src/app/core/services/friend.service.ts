@@ -11,7 +11,7 @@ export class FriendsServices {
   constructor(private http: HttpClient) {}
 
   private getDate(callbackFn: any) {
-    return this.http.get<Game>(`${environment.fbDbUrl}/friends.json`).pipe(
+    return this.http.get<Game>(`${environment.firebase.databaseURL}/friends.json`).pipe(
       map((response: { [key: string]: any }) => {
         return Object.keys(response).map((key) => ({
           ...response[key],

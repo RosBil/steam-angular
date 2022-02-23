@@ -11,7 +11,7 @@ export class GamesServices {
   constructor(private http: HttpClient) { }
 
   getGamesByName(name: string): Observable<Game[]> {
-    return this.http.get<Game>(`${environment.fbDbUrl}/games.json`).pipe(
+    return this.http.get<Game>(`${environment.firebase.databaseURL}/games.json`).pipe(
       map((response: { [key: string]: any }) => {
         return Object.keys(response).map((key) => ({
           ...response[key],
