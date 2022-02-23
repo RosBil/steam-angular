@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Game } from '../../interfaces/game.interface';
 import { GamesServices } from '../../../core/services/game.service';
 import { SearchService } from '../../../core/services/search.service';
@@ -9,17 +9,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './card-item.component.html',
   styleUrls: ['./card-item.component.scss'],
 })
-export class CardItemComponent implements OnInit {
-  @Input() game!: Game;
-  isLoggedIn: boolean;
+export class CardItemComponent {
+  @Input()game!: Game;
   @Output() remove = new EventEmitter<string>();
-  constructor(private gamesService: GamesServices, 
+  constructor(private gamesService: GamesServices,
     private searchService: SearchService,
-    private authService: AuthService) {}
-
-  ngOnInit(): void {
-    this.isLoggedIn = this.authService.isUserLoggedIn();
-  }
+    public authService: AuthService) {}
 
   changeLibraryStatus(game: Game): void {
     this.gamesService.setToLibrary(game).subscribe(() => {
@@ -33,7 +28,7 @@ export class CardItemComponent implements OnInit {
 
   }
 
-  removeFromLibrary(game: Game): void {    
+  removeFromLibrary(game: Game): void {
     this.changeLibraryStatus({ ...game, inLibrary: false });
   }
 }
