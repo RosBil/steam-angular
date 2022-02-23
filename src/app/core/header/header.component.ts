@@ -44,6 +44,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private setMainPageLink() {
-    this.mainPageLink = this.isAuthorized ? '/games' : '/login';
+    this.mainPageLink = this.authService.loginInfo$ ? '/games' : '/login';
   }
 }
