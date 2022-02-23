@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Game } from '../../interfaces/game.interface';
 import { GamesServices } from '../../../core/services/game.service';
 import { SearchService } from '../../../core/services/search.service';
@@ -11,6 +11,7 @@ import { SearchService } from '../../../core/services/search.service';
 export class CardItemComponent implements OnInit {
   @Input() game!: Game;
   @Input() isLoggedIn: boolean;
+  @Output() remove = new EventEmitter<string>();
   constructor(private gamesService: GamesServices, private searchService: SearchService) {}
 
   ngOnInit(): void {}
@@ -18,6 +19,7 @@ export class CardItemComponent implements OnInit {
   changeLibraryStatus(game: Game): void {
     this.gamesService.setToLibrary(game).subscribe(() => {
       this.searchService.search();
+      return this.remove.emit(game.id)
     });
   }
 
@@ -26,8 +28,7 @@ export class CardItemComponent implements OnInit {
 
   }
 
-  removeFromLibrary(game: Game): void {
+  removeFromLibrary(game: Game): void {    
     this.changeLibraryStatus({ ...game, inLibrary: false });
-    
   }
 }
