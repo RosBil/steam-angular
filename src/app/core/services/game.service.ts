@@ -11,7 +11,7 @@ export class GamesServices {
   constructor(private http: HttpClient) { }
 
   getGamesByName(name: string): Observable<Game[]> {
-    return this.http.get<Game>(`${environment.fbDbUrl}/games.json`).pipe(
+    return this.http.get<Game>(`${environment.firebase.databaseURL}/games.json`).pipe(
       map((response: { [key: string]: any }) => {
         return Object.keys(response).map((key) => ({
           ...response[key],
@@ -24,7 +24,21 @@ export class GamesServices {
     );
   }
 
+  getGamesInLibrary(): Observable<Game[]> {
+    return this.http.get<Game>(`${environment.firebase.databaseURL}/games.json`).pipe(
+      map((response: { [key: string]: any }) => {
+        return Object.keys(response).map((key) => ({
+          ...response[key],
+          id: key,
+        }));
+      }),
+      map((games) =>
+        games.filter((game) => game.inLibrary)
+      )
+    );
+  }
+
   setToLibrary(game: Game): Observable<Game> {
-    return this.http.patch<Game>(`${environment.fbDbUrl}/games/${game.id}.json`, game);
+    return this.http.patch<Game>(`${environment.firebase.databaseURL}/games/${game.id}.json`, game);
   }
 }

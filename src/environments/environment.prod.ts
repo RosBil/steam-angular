@@ -1,6 +1,5 @@
 export const environment = {
   production: true,
-  fbDbUrl: 'https://steam-angular-bec5b-default-rtdb.firebaseio.com/',
   firebase: {
     apiKey: "AIzaSyDjiGr1GrNYB7mhDCMdmqVniMy9CX7KnuA",
     authDomain: "steam-angular-bec5b.firebaseapp.com",

@@ -1,54 +1,67 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import {
+  BehaviorSubject,
+  combineLatest,
+  Observable,
+  switchMap,
+  map,
+} from 'rxjs';
 import { Friend } from '../shared/interfaces/friend.interface';
-import { FriendsServices } from '../core/services/friend.service';
+import { FriendsServices } from '../core/services/friends.service';
 
 @Component({
   selector: 'app-friends',
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.scss'],
 })
-export class FriendsComponent implements OnInit, OnDestroy {
-  friendsList: Friend[] = [];
+export class FriendsComponent implements OnInit {
+  friendsList$: Observable<Friend[]>;
+  nameQuery$ = new BehaviorSubject<string>('');
+  removedFriendIds$ = new BehaviorSubject<string[]>([]);
   searchName = '';
   label = 'Friends';
-  subscription: Subscription = new Subscription();
 
   constructor(private friendsService: FriendsServices) {}
 
-  fillField(name: string) {
-    this.friendsList = [];
+  ngOnInit(): void {
+    this.getAllUsers();
+  }
+
+  getAllUsers(): void {
+    const allFriends = this.nameQuery$.pipe(
+      switchMap((name: string) =>
+        name
+          ? this.friendsService.getUserByName(name)
+          : this.friendsService.getFriends()
+      )
+    );
+
+    this.friendsList$ = combineLatest([
+      allFriends,
+      this.removedFriendIds$,
+    ]).pipe(
+      map(([friends, removedIdList]: [Friend[], string[]]) =>
+        friends.filter((friend) => !removedIdList.includes(friend.id || ''))
+      )
+    );
+  }
+
+  fillField(name: string): void {
     this.searchName = name;
   }
 
-  getFriend() {
-    this.subscription = this.friendsService
-      .getMyFriends()
-      .subscribe((friends) => (this.friendsList = friends));
-  }
-
   searchFriend(name: string): void {
-    this.subscription = this.friendsService
-      .getFriendsByName(name)
-      .subscribe((friends) => {
-        this.friendsList = friends;
-      });
+    this.nameQuery$.next(name);
   }
 
-  removeFromList(id: string) {
-    this.friendsList = this.friendsList.filter((friend) => friend.id !== id);
+  removeFromList(id: string): void {
+    this.removedFriendIds$.next([...this.removedFriendIds$.value, id]);
   }
 
-  clearSearch() {
+  clearSearch(): void {
     this.searchName = '';
-    this.getFriend();
-  }
-
-  ngOnInit(): void {
-    this.getFriend();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.removedFriendIds$.next([]);
+    this.nameQuery$.next('');
+    this.getAllUsers();
   }
 }
