@@ -1,51 +1,62 @@
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {AngularFireDatabase} from '@angular/fire/compat/database'
+import {AngularFireDatabase} from '@angular/fire/compat/database';
 
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, tap} from 'rxjs';
 import {LoginData} from "../../shared/interfaces/login-data.interface";
-import {User} from "../../shared/interfaces/user.interface";
+
+import {LocalStorageService} from "./local-storage.service";
+import {LocalStorageKeys} from "../enums/local-storage-keys";
+import {UserDataInfo} from "../models/user-data-info";
+import firebase from "firebase/compat";
+import UserCredential = firebase.auth.UserCredential;
+import {CurrentUserInfo} from "../models/current-user-info";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  loginInfo$ = new BehaviorSubject(false);
+  loginInfo$: BehaviorSubject<boolean>;
 
-  private isLoggedIn: any = false;
-  private usersExtendedData: Array<any> = [];
+  private isLoggedIn: boolean;
+  private usersExtendedData: Array<Partial<CurrentUserInfo>> = [];
 
-  constructor(public auth: AngularFireAuth,
-              private db: AngularFireDatabase) {
+  constructor(
+    private fireAuth: AngularFireAuth,
+    private dataBase: AngularFireDatabase,
+    private localStorageService: LocalStorageService
+  ) {
+    this.isLoggedIn = !!this.localStorageService.getParsedLocalStorageItem(LocalStorageKeys.loginInfo);
 
+    this.loginInfo$ = new BehaviorSubject<boolean>(this.isLoggedIn);
   }
 
-  private async setLoginInfo(loginInfo = false) {
+  private setLoginInfo(loginInfo = false): void {
     this.isLoggedIn = loginInfo;
 
     this.loginInfo$.next(this.isLoggedIn);
   }
 
-  private getUserData(uid: string = ''): Observable<any> {
-    return this.db.list(`/usersData`).valueChanges().pipe(
-      tap(data => {
+  private getUserData(uid = ''): Observable<Array<Partial<CurrentUserInfo>>> {
+    return this.dataBase.list(`/usersData`).valueChanges().pipe(
+      tap((data: Array<any>) => {
         this.usersExtendedData = data || [];
 
         if (uid) {
-          const currentUser =  this.usersExtendedData.find(user => user.uid === uid);
+          const currentUser: Partial<CurrentUserInfo> | undefined =
+            this.usersExtendedData.find(user => user.uid === uid);
 
           if (currentUser) {
-            const info = window.localStorage.getItem('loginInfo');
-            const userInfo = info ? JSON.parse(info) : null;
+            const userInfo = this.localStorageService.getParsedLocalStorageItem(LocalStorageKeys.loginInfo);
 
             if (userInfo) {
-              userInfo['user'] = {
+              userInfo.user = {
                 ...userInfo?.user,
                 ...currentUser
               };
 
-              window.localStorage.removeItem('loginInfo');
-              window.localStorage.setItem('loginInfo', JSON.stringify(userInfo));
+              this.localStorageService.removeLocalStorageItem(LocalStorageKeys.loginInfo);
+              this.localStorageService.setLocalStorageItem(LocalStorageKeys.loginInfo, userInfo);
             }
           }
         }
@@ -53,44 +64,38 @@ export class AuthService {
     );
   }
 
-  updateProfile (user: User) {
-    return this.db.list(`/usersData`).set(user.uid, user).then(() => {
+  updateProfile (user: any): Promise<void> {
+    return this.dataBase.list(`/usersData`).set(user.uid, user).then(() => {
       this.getUserData(user.uid).subscribe();
     });
   }
 
-  login(loginData: LoginData) {
-    return this.auth.signInWithEmailAndPassword(loginData.email, loginData.password)
-      .then((result) => {
-        window.localStorage.setItem('loginInfo', JSON.stringify(result));
+  login(loginData: LoginData): Promise<void> {
+    return this.fireAuth.signInWithEmailAndPassword(loginData.email, loginData.password)
+      .then((result: UserCredential | UserDataInfo) => {
+        this.localStorageService.setLocalStorageItem(LocalStorageKeys.loginInfo, result);
 
         this.getUserData(result?.user?.uid).subscribe(() => {
           this.setLoginInfo(true);
         });
       })
       .catch((error) => {
-        window.localStorage.removeItem('loginInfo');
+        this.localStorageService.removeLocalStorageItem(LocalStorageKeys.loginInfo);
         this.setLoginInfo(false);
         alert('Email or Password are incorrect');
         console.log('This is error message', error.message);
       })
   }
 
-  logout() {
-    return this.auth.signOut().then(() => {
-      window.localStorage.removeItem('loginInfo');
+  logout(): Promise<void> {
+    return this.fireAuth.signOut().then(() => {
+      this.localStorageService.removeLocalStorageItem(LocalStorageKeys.loginInfo);
       this.setLoginInfo(false);
     });
   }
 
-  // updateProfile(profile: any) {
-  //   return this.auth.updateCurrentUser(profile).then((res) => {
-  //     window.localStorage.removeItem('loginInfo');
-  //     window.localStorage.setItem('loginInfo', JSON.stringify(res));
-  //   });
-  // }
-
-  isUserLoggedIn() {
-    return !!localStorage.getItem('loginInfo') && this.isLoggedIn;
+  isUserLoggedIn(): boolean {
+    return !!this.localStorageService.getParsedLocalStorageItem(LocalStorageKeys.loginInfo) &&
+      this.isLoggedIn;
   }
 }

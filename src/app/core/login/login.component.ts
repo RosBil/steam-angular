@@ -1,8 +1,11 @@
-import { Component, ContentChild, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoginData } from 'src/app/shared/interfaces/login-data.interface';
-import { AuthService } from 'src/app/core/services/auth.service';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {LoginData} from 'src/app/shared/interfaces/login-data.interface';
+import {AuthService} from 'src/app/core/services/auth.service';
+import {from} from "rxjs";
+import {LocalStorageKeys} from "../enums/local-storage-keys";
+import {LocalStorageService} from "../services/local-storage.service";
 
 
 @Component({
@@ -12,14 +15,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  @Output() formData: EventEmitter<{
-    email: string;
-    password: string;
-  }> = new EventEmitter();
+  @Output() formData = new EventEmitter<LoginData>();
 
-  responsedata: any;
   formLogin: FormGroup;
   emailValidation = true;
   isLogin = true;
@@ -27,32 +26,34 @@ export class LoginComponent implements OnInit {
   public showPasswordOnPress: boolean;
 
    constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
+    private localStorageService: LocalStorageService,
     private readonly authService: AuthService,
     private readonly router: Router
   ) {
-    this.formLogin = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      pass: new FormControl('', [Validators.required, Validators.minLength(6)])
+    this.formLogin = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      pass: ['', [Validators.required, Validators.minLength(6)]]
     });
-     localStorage.clear();
+     this.localStorageService.removeLocalStorageItem(LocalStorageKeys.loginInfo);
   }
 
-
-  ngOnInit(): void {
-
-  }
-
-   async login() {
+   login() {
     const { email, pass } = this.formLogin.value;
 
-     await this.authService
-      .login({
-        email,
-        password: pass
-      })
-        .then(() => this.router.navigate(['/games']));
+    from(this.authService.login({
+      email,
+      password: pass
+    }))
+      .subscribe(() => this.router.navigate(['/games'])
+   )
 
+      // this.authService
+      // .login({
+      //   email,
+      //   password: pass
+      // })
+      //   .then(() => this.router.navigate(['/games']));
   };
 
    get f(): { [key: string]: AbstractControl } {
