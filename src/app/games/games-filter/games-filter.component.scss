@@ -1,5 +1,8 @@
 .games-controls {
   padding-left: 10px;
+  max-width: 205px;
+  display: flex;
+  flex-direction: column;  
 }
 
 .price-filter_title,
@@ -30,20 +33,24 @@
   margin: 0 auto;
   width: 80%;
 }
+
 .range_input--value {
   padding: 5px;
   text-align: center;
   margin-bottom: 30px;
 }
+
 .tag-filter {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
+
 .tag-filter_item--checkbox {
   display: inline-flex;
   width: fit-content;
 }
+
 .tag-filter_item--label {
   display: inline-flex;
 }
