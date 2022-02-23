@@ -5,8 +5,8 @@
   [label]="label"
 ></app-search>
 
-<div *ngIf="searchName.trim().length === 0; else searchList">
-  <div class="user-list" *ngIf="friendsList">
+<div *ngIf="friendsList$ | async as friendsList">
+  <div class="user-list" *ngIf="!searchName.length; else searchList">
     <h2>My Friends</h2>
     <div>
       <app-friend-item
@@ -20,21 +20,24 @@
       <p>You don't have any friends</p>
     </div>
   </div>
+
+  <ng-template #searchList>
+    <div class="user-list">
+      <div class="search-panel">
+        <h2>Search Field: {{ searchName }}</h2>
+      </div>
+      <div *ngIf="friendsList.length === 0; else emptyList">
+        <p>search result: {{ friendsList.length }}</p>
+        <button (click)="clearSearch()">&#8592; back</button>
+      </div>
+      <ng-template #emptyList>
+        <app-friend-item
+          *ngFor="let friend of friendsList"
+          [friend]="friend"
+          (remove)="removeFromList($event)"
+        ></app-friend-item>
+        <button (click)="clearSearch()">&#8592; back</button>
+      </ng-template>
+    </div>
+  </ng-template>
 </div>
-
-<ng-template #searchList>
-  <div class="user-list">
-    <div class="search-panel">
-      <h2>Search Field: {{ searchName }}</h2>
-      <button class="btn-inline" (click)="clearSearch()">clear search</button>
-    </div>
-
-    <div>
-      <app-friend-item
-        *ngFor="let friend of friendsList"
-        [friend]="friend"
-        (remove)="removeFromList($event)"
-      ></app-friend-item>
-    </div>
-  </div>
-</ng-template>
