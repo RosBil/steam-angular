@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GamesServices } from '../../../core/services/game.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchService } from '../../../core/services/search.service';
 
 @Component({
@@ -7,19 +6,17 @@ import { SearchService } from '../../../core/services/search.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
   @Output() onClickEvent = new EventEmitter<string>();
   @Output() inputEvent = new EventEmitter<string>();
   @Input() label: string = '';
 
   constructor(
-    private searchService: SearchService,
-    private gamesService: GamesServices
+    private searchService: SearchService
   ) {}
 
   updateSearchPhrase(phrase: string) {
     this.searchService.setSearchPhrase(phrase);
-    console.log(this.searchService.getSearchPhrase());
   }
 
   search(value: string) {
@@ -29,6 +26,4 @@ export class SearchComponent implements OnInit {
   fillField(value: string) {
     this.inputEvent.emit(value);
   }
-
-  ngOnInit(): void {}
 }
