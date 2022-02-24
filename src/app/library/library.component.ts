@@ -19,7 +19,6 @@ export class LibraryComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.auth.isUserLoggedIn();
-    // this.gamesList$ = this.gamesService.getGamesInLibrary();
     this.getAll()
     this.gamesList$.subscribe((data) => console.log(data));
   }
@@ -36,7 +35,5 @@ export class LibraryComponent implements OnInit {
 
   removeFromList(id: string): void {
     this.removedGamesIds$.next([...this.removedGamesIds$.value, id || '']);
-    this.removedGamesIds$.subscribe(data => console.log(data)
-    )
   }
 }
