@@ -2,7 +2,7 @@
   padding-left: 10px;
   max-width: 205px;
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
 }
 
 .price-filter_title,
@@ -56,11 +56,16 @@
 }
 
 @media screen and (max-width: 700px) {
+  .games-controls {
+    text-align: center;
+    margin: 0 auto;
+  }
+
   .range_input--value {
     margin-bottom: 0px;
   }
 
-  .checkbox-wrap{
+  .checkbox-wrap {
     padding: 0;
     display: flex;
     justify-content: space-around;
