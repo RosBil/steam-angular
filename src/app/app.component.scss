@@ -14,3 +14,24 @@
     margin-top: 56px;
   }
 }
+
+
+@media screen and (max-width: 520px) {
+  .main {
+    padding: 10px;
+    margin: 0 auto 32px;
+    min-height: 100vh;
+    padding: 0;
+    &.no-header {
+      margin-top: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .main {
+    margin: 0;
+    padding: 20px 10px;
+    max-width: 100vw;
+  }
+}
